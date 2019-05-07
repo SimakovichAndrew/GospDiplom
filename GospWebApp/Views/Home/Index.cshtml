@@ -1,0 +1,53 @@
+﻿@model IEnumerable<GospWebApp.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@using (Html.BeginForm())
+{
+    <div>
+        <h2>User Details</h2>
+        @Html.ActionLink("Add User", "Add", "")
+    </div>
+    <div>
+        <table>
+            <tr style="background-color: #FFFACD; text-align:center">
+                <th style="text-align:left">
+                    Nomer
+                </th>
+                <th style="text-align:left">
+                    Model
+                </th>
+                <th style="text-align:left">
+                    Manage
+                </th>
+            </tr>
+
+            @{
+                foreach (var item in Model)
+                {
+                    <tr style="background-color: #FFFFF0">
+                        <td>
+                            @item.Nomer
+                        </td>
+                        <td>
+                            @item.Model
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = @item.Id }) /@Html.ActionLink("Delete", "Delete", new { id = @item.Id })
+
+                        </td>
+
+                    </tr>
+                }
+            }
+
+        </table>
+
+    </div>
+
+
+}  
