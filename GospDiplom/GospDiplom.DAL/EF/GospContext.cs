@@ -6,11 +6,11 @@ using GospDiplom.DAL.Entities;
 
 namespace GospDiplom.DAL.EF
 {
-    class GospContext : DbContext
+    public class GospContext : DbContext
     {
         public GospContext(string connectionString) : base(connectionString) { }
 
-        public DbSet<Equipment> Kiosks { get; set; }
+        public DbSet<Kiosk> Kiosks { get; set; }
         public DbSet<Schetchik> Schetchiks { get; set; }
         public DbSet<KioskEq> KioskEqs { get; set; }
         public DbSet<Equipment> Equipments { get; set; }

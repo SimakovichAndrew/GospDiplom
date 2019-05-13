@@ -13,17 +13,17 @@ namespace GospDiplom.DAL.EF
         {
            // base.Seed(db);
 
-            db.Kiosks.AddRange(new List<Equipment>
+            db.Kiosks.AddRange(new List<Kiosk>
             {
-                new Equipment
+                new Kiosk
                 {
                     Nomer=1, ModelKioska="Павильон", IdOsn=1, IdTexUchet=2
                 },
-                new Equipment
+                new Kiosk
                 {
                     Nomer=2, ModelKioska="Киоск", IdOsn=1, IdTexUchet=4
                 },
-                new Equipment
+                new Kiosk
                 {
                     Nomer=3, ModelKioska="Киоск", IdOsn=5, IdTexUchet=6
                 }

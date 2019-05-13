@@ -1,4 +1,9 @@
-﻿using System;
+﻿using GospDiplom.BLL.Infrastructure;
+using GospDiplom.WEB.Util;
+using Ninject;
+using Ninject.Modules;
+using Ninject.Web.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,7 +11,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace GospDiplom.Web
+namespace GospDiplom.WEB
 {
     public class MvcApplication : System.Web.HttpApplication
     {
@@ -16,6 +21,12 @@ namespace GospDiplom.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+          
+            // внедрение зависимостей
+            NinjectModule orderModule = new OrderModule();
+            NinjectModule serviceModule = new ServiceModule("DefaultConnection");
+            var kernel = new StandardKernel(orderModule, serviceModule);
+            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }
     }
 }

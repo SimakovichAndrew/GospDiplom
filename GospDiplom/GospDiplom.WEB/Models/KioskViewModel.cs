@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Web;
 
-namespace GospDiplom.DAL.Entities
+namespace GospDiplom.WEB.Models
 {
-   public class Kiosk
+    public class KioskViewModel
     {
         public int KioskId { get; set; }
         public int Nomer { get; set; }
@@ -12,9 +13,5 @@ namespace GospDiplom.DAL.Entities
         public int IdOsn { get; set; }
         public int IdTexUchet { get; set; }
         public DateTime Arenda { get; set; }
-
-        public ICollection<Equipment> equipments { get; set; }
-        public ICollection<Schetchik> schetchiks { get; set; }
-
     }
 }

@@ -7,11 +7,12 @@ using GospDiplom.DAL.Interfaces;
 using GospDiplom.DAL.Entities;
 using GospDiplom.DAL.EF;
 
-namespace GospDiplom.DAL.Repositiries
+namespace GospDiplom.DAL.Repositories
 {
     class EquipmentRepository : IRepository<Equipment>
     {
         private GospContext db;
+
         public EquipmentRepository(GospContext context)
         {
             db = context;
@@ -31,7 +32,7 @@ namespace GospDiplom.DAL.Repositiries
 
         public IEnumerable<Equipment> Find(Func<Equipment, bool> predicate)
         {
-            return db.Equipments.Include(o => o.EqId).Where(predicate).ToList();
+            return db.Equipments.Include(o => o.EquipmentId).Where(predicate).ToList();
         }
 
         public Equipment Get(int id)

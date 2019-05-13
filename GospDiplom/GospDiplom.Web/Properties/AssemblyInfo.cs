@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется следующим образом
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанных с этой сборкой.
-[assembly: AssemblyTitle("GospDiplom.Web")]
+[assembly: AssemblyTitle("GospDiplom.WEB")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("GospDiplom.Web")]
+[assembly: AssemblyProduct("GospDiplom.WEB")]
 [assembly: AssemblyCopyright("© , 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для ID библиотеки типов typelib, если этот проект видим для COM
-[assembly: Guid("6ad043c6-4c46-48db-a7d4-84d8d33219bd")]
+[assembly: Guid("4cf2ec53-ebd8-4c4b-b280-3ab09fe33386")]
 
 // Сведения о версии сборки состоят из указанных ниже четырех значений:
 //
