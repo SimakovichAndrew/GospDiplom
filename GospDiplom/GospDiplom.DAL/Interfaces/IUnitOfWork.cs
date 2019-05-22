@@ -11,7 +11,8 @@ namespace GospDiplom.DAL.Interfaces
         IRepository<Kiosk> Kiosks { get; }
         IRepository<Schetchik> Schetchiks { get; }
         IRepository<Equipment> Equipments { get; }
-        IRepository<KioskEq> KioskEquipments { get; }
+        IRepository<Indication> Indications { get; }
+
         Task SaveAsync();
         void Save();
     }

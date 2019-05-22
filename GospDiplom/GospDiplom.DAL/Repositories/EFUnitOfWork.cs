@@ -19,7 +19,9 @@ namespace GospDiplom.DAL.Repositories
 
         private IRepository<Equipment> EquipmentRepository;// => throw new NotImplementedException();
 
-        private IRepository<KioskEq> KioskEquipmentRepository;// => throw new NotImplementedException();
+        private IRepository<Indication> IndicationRepository;  // => throw new NotImplementedException();
+
+      //  private IndicationRepository<KioskEq> KioskEquipmentRepository;// => throw new NotImplementedException();
 
 
 
@@ -27,6 +29,7 @@ namespace GospDiplom.DAL.Repositories
         {
             db = new GospContext(connectionString);
         }
+
 
         public IRepository<Kiosk> Kiosks
         {
@@ -38,7 +41,7 @@ namespace GospDiplom.DAL.Repositories
             }
         }
 
-    public IRepository<Schetchik> Schetchiks
+        public IRepository<Schetchik> Schetchiks
         {
             get
             {
@@ -58,15 +61,27 @@ namespace GospDiplom.DAL.Repositories
             }
         }
 
-        public IRepository<KioskEq> KioskEquipments
+        public IRepository<Indication> Indications
         {
             get
             {
-                if (KioskEquipmentRepository == null)
-                    KioskEquipmentRepository = new KioskEqRepository(db);
-                return KioskEquipmentRepository;
+                if (IndicationRepository == null)
+                    IndicationRepository = new IndicationRepository(db);
+                return IndicationRepository;
             }
         }
+
+        // public IndicationRepository<Indication> Indications => throw new NotImplementedException();
+
+        //public IndicationRepository<KioskEq> KioskEquipments
+        //{
+        //    get
+        //    {
+        //        if (KioskEquipmentRepository == null)
+        //            KioskEquipmentRepository = new KioskEqRepository(db);
+        //        return KioskEquipmentRepository;
+        //    }
+        //}
 
         private bool disposed = false;
 
@@ -92,6 +107,7 @@ namespace GospDiplom.DAL.Repositories
           //  Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         public void Save()
         {
             throw new NotImplementedException();

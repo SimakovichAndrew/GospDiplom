@@ -15,13 +15,14 @@ namespace GospDiplom.WEB.Controllers
 {
     public class HomeController : Controller
     {
-        IOrderService orderService;
+        IProcedureService orderService;
 
         public HomeController()
         {
-           
+
         }
-        public HomeController(IOrderService serv)
+
+        public HomeController(IProcedureService serv)
         {
             orderService = serv;
         }
@@ -31,6 +32,14 @@ namespace GospDiplom.WEB.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<KioskDTO, KioskViewModel>()).CreateMapper();
             var phones = mapper.Map<IEnumerable<KioskDTO>, List<KioskViewModel>>(phoneDtos);
             return View(phones);
+
+            //// получаем из бд все объекты Book
+            //IEnumerable<Kiosk> books = db.Kiosks;
+            //// передаем все объекты в динамическое свойство Books в ViewBag
+            //ViewBag.Books = books;
+            //// возвращаем представление
+            //return View();
+
         }
 
         public ActionResult MakeOrder(int? id)
@@ -52,8 +61,8 @@ namespace GospDiplom.WEB.Controllers
         {
             try
             {
-                var orderDto = new KioskDTO { KioskId = order.KioskId, ModelKioska = order.Address, Nomer = order.PhoneNumber };
-                orderService.MakeOrder(orderDto);
+                var orderDto = new KioskDTO { KioskId = order.KioskId, ModelKioska = order.Town, Nomer = order.KioskNumber };
+                orderService.MakeProcedure(orderDto);
                 return Content("<h2>Ваш заказ успешно оформлен</h2>");
             }
             catch (ValidationException ex)
@@ -62,10 +71,10 @@ namespace GospDiplom.WEB.Controllers
             }
             return View(order);
         }
-        protected override void Dispose(bool disposing)
-        {
-            orderService.Dispose();
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    orderService.Dispose();
+        //    base.Dispose(disposing);
+        //}
     }
 }

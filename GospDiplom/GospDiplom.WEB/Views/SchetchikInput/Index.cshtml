@@ -1,0 +1,71 @@
+﻿@model GospDiplom.WEB.Models.SchetchikViewModel
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add Numbers</title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+        body {
+            background-color: beige;
+            font-family: Verdana, Arial;
+            margin: 50px;
+        }
+
+        form {
+            padding: 10px;
+            border-style: solid;
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div>
+
+        @foreach (var item in ViewBag.totalMessage)
+        {
+            <tr>
+                <td>
+                    @item.Tarif1DTO)
+                </td>
+                <td>
+                    @item.Tarif2DTO)
+                </td>
+                <td>
+                     item.SchetcikId)
+                </td>
+                <td>
+                    @Html.ActionLink("Order", "MakeOrder", new { KioskDTOId = item.KioskDTOId })
+                </td>
+            </tr>
+        }
+    </div>
+
+
+
+    <p>Enter two whole numbers and then click <strong>Add</strong>.</p>
+    <form action="" method="post">
+        <p>
+            <label for="text1">First Number:</label>
+            <text type="text" name="text1">
+            @Model.Tarif1DTO
+            </text>
+        </p>
+        <p>
+            <label for="text2">Second Number:</label>
+            <text type="text" name="text2">@Model.Tarif2DTO</text>
+        </p>
+        <p><input type="submit" value="Add" /></p>
+    </form>
+
+    <p>@ViewBag.Message</p>
+
+</body>
+</html>
+

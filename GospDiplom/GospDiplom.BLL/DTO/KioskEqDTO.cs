@@ -7,9 +7,9 @@ namespace GospDiplom.BLL.DTO
     public class KioskEqDTO
     {
         public int KioskEqDTOId { get; set;}
-        public int EqId { get; set; }
-        public int KioskId { get; set; }
-        public int Quantity { get; set; }
+        public int EqIdDTO { get; set; }
+        public int KioskDTOId { get; set; }
+        public int QuantityDTO { get; set; }
 
     }
 }

@@ -33,7 +33,8 @@ namespace GospDiplom.DAL.Repositories
 
         public IEnumerable<Kiosk> Find(Func<Kiosk, bool> predicate)
         {
-            return db.Kiosks.Include(o => o.KioskId).Where(predicate).ToList();
+            return db.Kiosks.Where(predicate).ToList();
+           // return db.Kiosks.Include(o => o.KioskEqId).Where(predicate).ToList();
         }
 
         public Kiosk Get(int id)
@@ -46,9 +47,9 @@ namespace GospDiplom.DAL.Repositories
             return db.Kiosks;
         }
 
-        public Kiosk GetString(string topicname)
+        public Kiosk GetString(string nomer)
         {
-            return db.Kiosks.Where(x => x.Nomer == Convert.ToInt16(topicname)).First();
+            return db.Kiosks.Where(x => x.Nomer == nomer).First();
         }
 
         public void Update(Kiosk item)

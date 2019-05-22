@@ -35,7 +35,8 @@ namespace GospDiplom.DAL.Repositories
 
         public IEnumerable<Schetchik> Find(Func<Schetchik, bool> predicate)
         {
-            return db.Schetchiks.Include(o => o.IdKiosk).Where(predicate).ToList();
+            return db.Schetchiks.Where(predicate).ToList();
+            //return db.Schetchiks.Include(o => o.KioskEqId).Where(predicate).ToList();
         }
 
         public Schetchik Get(int id)
@@ -48,9 +49,9 @@ namespace GospDiplom.DAL.Repositories
             return db.Schetchiks;
         }
 
-        public Schetchik GetString(string topicname)
+        public Schetchik GetString(string nomer)
         {
-            return db.Schetchiks.Where(x => x.ModelSchetchika == topicname).First();
+            return db.Schetchiks.Where(x => x.SchetchikId.ToString() == nomer).First();
         }
 
         public void Update(Schetchik item)

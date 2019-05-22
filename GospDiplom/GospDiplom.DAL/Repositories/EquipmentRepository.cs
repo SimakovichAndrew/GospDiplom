@@ -32,7 +32,8 @@ namespace GospDiplom.DAL.Repositories
 
         public IEnumerable<Equipment> Find(Func<Equipment, bool> predicate)
         {
-            return db.Equipments.Include(o => o.EquipmentId).Where(predicate).ToList();
+            return db.Equipments.Where(predicate).ToList();
+            //return db.KioskEqs.Include(o => o.EquipmentId).Where(predicate).ToList();
         }
 
         public Equipment Get(int id)
@@ -45,9 +46,9 @@ namespace GospDiplom.DAL.Repositories
             return db.Equipments;
         }
 
-        public Equipment GetString(string topicname)
+        public Equipment GetString(string model)
         {
-            return db.Equipments.Where(x => x.ModelEq == topicname).First();
+            return db.Equipments.Where(x => x.ModelEq == model).First();
         }
 
         public void Update(Equipment item)

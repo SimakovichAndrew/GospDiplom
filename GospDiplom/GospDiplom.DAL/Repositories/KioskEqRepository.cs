@@ -14,6 +14,7 @@ namespace GospDiplom.DAL.Repositories
         private GospContext db;
 
         public KioskEqRepository(GospContext context) { db = context; }
+
         public void Create(KioskEq item)
         {
             db.KioskEqs.Add(item);
@@ -30,7 +31,8 @@ namespace GospDiplom.DAL.Repositories
 
         public IEnumerable<KioskEq> Find(Func<KioskEq, bool> predicate)
         {
-            return db.KioskEqs.Include(o => o.EqId).Where(predicate).ToList();
+            return db.KioskEqs.Where(predicate).ToList();
+            //return db.KioskEqs.Include(o => o.EqId).Where(predicate).ToList();
             //throw new NotImplementedException();
         }
 
@@ -44,10 +46,10 @@ namespace GospDiplom.DAL.Repositories
             return db.KioskEqs;
         }
 
-        public KioskEq GetString(string topicname)
+        public KioskEq GetString(string name)
         {
             throw new NotImplementedException();
-            //return db.KioskEqs.Where(x => x.Quantity==topicname)
+            //return db.KioskEqs.Where(x => x.Quantity==name)
         }
 
         public void Update(KioskEq item)

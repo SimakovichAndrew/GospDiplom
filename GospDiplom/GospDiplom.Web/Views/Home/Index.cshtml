@@ -12,10 +12,10 @@
             @Html.DisplayNameFor(model => model.Nomer)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Company)
+            @Html.DisplayNameFor(model => model.ModelKioska)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.Town)
         </th>
         <th></th>
     </tr>
@@ -27,10 +27,10 @@
                 @Html.DisplayFor(modelItem => item.Nomer)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Company)
+                @Html.DisplayFor(modelItem => item.ModelKioska)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.Town)
             </td>
             <td>
                 @Html.ActionLink("Order", "MakeOrder", new { KioskId = item.KioskId })
