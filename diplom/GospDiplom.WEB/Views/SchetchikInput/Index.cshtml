@@ -1,0 +1,106 @@
+﻿@*@model IEnumerable<GospDiplom.WEB.Models.InputViewModels>*@
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add Numbers</title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+        body {
+            background-color: beige;
+            font-family: Verdana, Arial;
+            margin: 50px;
+        }
+
+        form {
+            padding: 10px;
+            border-style: solid;
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+
+    <p>Enter two whole numbers and then click <strong>Add</strong>.</p>
+    <hr />
+    <table>
+
+        @*@foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        Номер Счетчика
+                        item.Kiosk.Kiosk
+                    </td>
+
+                    <td>
+                        Двухтарифный
+                        item.Indication.Tarif1
+                    </td>
+                    <td>
+                        @Html.ActionLink("Order", "MakeOrder", new { KioskDTOId = item.Kiosk.Kiosk })
+                    </td>
+                </tr>
+            }*@
+    </table>
+
+    <hr />
+    <table>
+        <tr>
+            <td> Номер счетчика</td>
+            <td>Номер киоска </td>
+            <td>Тех учет </td>
+        </tr>
+        @foreach (var item in ViewBag.totalMessage)
+        {
+            <tr>
+                <td> @item.NomerSchetchika</td>
+
+                <td> @item.IdKiosk</td>
+
+                <td>@item.TexUchet</td>
+            </tr>
+        }
+    </table>
+    <hr />
+    <table>
+        <tr>
+            <td> Киоск</td><td>Счетчик</td><td>Месяц</td><td>Показания</td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Kiosk.Nomer</td>
+                <td>@item.Counetr.SchetchikId</td>
+                <td>@item.Indication.Month.ToString("MMM")</td>
+                <td>@item.Indication.Tarif1</td>
+            </tr>
+        }
+    </table>
+
+
+        @*<form action="" method="post">
+            <p>
+                <label for="text1">First Number:</label>
+                <text type="text" name="text1">
+                    @Model.Tarif1
+                    </text>
+                    </p>
+                    <p>
+                        <label for="text2">Second Number:</label>
+                        <text type="text" name="text2">
+                           @Model.Tarif2
+                        </text>
+                    </p>
+                    <p><input type="submit" value="Add" /></p>
+                    </form>*@
+
+        @*<p>@ViewBag.Message</p>*@
+
+</body>
+</html>
+

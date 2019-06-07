@@ -1,0 +1,60 @@
+﻿@model IEnumerable<GospDiplom.WEB.Models.InputViewModels>
+
+@{
+    ViewBag.Title = "Таблица киосков";
+}
+
+<h2>Таблица киосков</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Номер киоска
+        </th>
+        <th>
+            Тип объекта
+        </th>
+        <th>
+            Город
+        </th>
+        <th>
+            Адрес
+        </th>
+        <th>
+            Организация
+        </th>
+        <th>
+            Аренда
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Kiosk.Nomer)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Kiosk.ModelKioska)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Kiosk.Town)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Kiosk.Adress)
+    </td>
+    <td>
+        Html.DisplayFor(modelItem => item.OrgName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Kiosk.Arenda)
+    </td>
+    <td>
+       @Html.ActionLink("Редактировать", "MakeOrder", new { id = 1 })
+    </td>
+
+</tr>
+    }
+
+</table>
