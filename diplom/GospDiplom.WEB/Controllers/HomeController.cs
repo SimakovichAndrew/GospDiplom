@@ -17,64 +17,44 @@ namespace GospDiplom.WEB.Controllers
     {
         IProcedureService orderService;
 
-        public HomeController()
-        {
-            Mapper.Initialize(cfg => cfg.CreateMap<KioskDTO, KioskViewModel>());
-        }
+        //public HomeController()
+        //{
+        //    Mapper.Initialize(cfg => cfg.CreateMap<KioskDTO, KioskViewModel>());
+        //}
 
         public HomeController(IProcedureService serv)
         {
             orderService = serv;
         }
+
+
+
+        [HttpGet]
         public ActionResult Index()
         {
             IEnumerable<KioskDTO> kioskDtos = orderService.GetKiosks();
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<KioskDTO, KioskViewModel>()).CreateMapper();
             List<KioskViewModel>  kiosks = mapper.Map<IEnumerable<KioskDTO>, List<KioskViewModel>>(kioskDtos);
-           // List<KioskViewModel> kiosks = mapper.Map<IEnumerable<KioskDTO>, List<KioskViewModel>>(kioskDtos);
-            //  IEnumerable<KioskViewModel> kioskViews = kiosks.AsEnumerable();
-
-         
-
+           
             IEnumerable<OrganizationDTO> OrgDtos = orderService.GetOrganizations();
             var mapperOrg = new MapperConfiguration(cfg => cfg.CreateMap<OrganizationDTO, OrganizationViewModel>()).CreateMapper();
             var organization = mapperOrg.Map<IEnumerable<OrganizationDTO>, List<OrganizationViewModel>>(OrgDtos);
-            //List<OrganizationViewModel> organizationViews = organization;
+            
 
             List<InputViewModels> listInput = new List<InputViewModels>();
 
-            for (int i=1; i<kiosks.Count;i++)
+            for (int i=0; i<kiosks.Count;i++)
             {
-                listInput.Add(new InputViewModels() { Kiosk = kiosks.ElementAt(i), OrgName = OrgDtos.ElementAt(i).OrgName });
+                listInput.Add(new InputViewModels() {
+                    Kiosk = kiosks.ElementAt(i),
+                    OrgName = organization.Where(x => x.OrganizationId == kiosks.ElementAt(i).OrganizationId ).First().OrgName,
+                    Dogovor = organization.Where(d=>d.OrganizationId==kiosks.ElementAt(i).OrganizationId).First().Dogovor
+                });
             }
 
-   ViewBag.OrgName = orderService.GetKiosk(3);
-            //for (int i = 1; i< 210; i++)
-            //{
-            //    InputViewModels kioski = new InputViewModels
-            //    {
-            //        GetKiosk = /*kioskViews.ElementAt(i)*/ kiosks.ElementAt(1),
-            //        // GetOrg = organizationViews.ElementAt(i)
-            //       OrgName = "Энергосбыт" //orderService.GetOrganizations().Where(x=>x.OrganizationId==1).First().OrgName
-            //};
-
-            //    listInput.Add(kioski);
-            //}
-
-            //// получаем из бд все объекты Book
-            //IEnumerable<Kiosk> books = db.Kiosks;
-            //// передаем все объекты в динамическое свойство Books в ViewBag
-            //ViewBag.Books = books;
-            //// возвращаем представление
-            //return View();
-            //IEnumerable<AllValue> kioskDtos = orderService.MakeProcedure();
-            //var mapper = new MapperConfiguration(cfg => cfg.CreateMap<AllValue, IndicationViewModel>()).CreateMapper();
-            //var kiosks = mapper.Map<IEnumerable<AllValue>, List<IndicationViewModel>>(kioskDtos);
-            //ViewBag.OrgName = orderService.GetKiosk(3);
-
             return View(listInput);
-            //return View(kiosks);
         }
+
 
         public ActionResult MakeOrder()
         {

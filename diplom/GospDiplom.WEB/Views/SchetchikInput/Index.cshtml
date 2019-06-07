@@ -1,4 +1,4 @@
-﻿@*@model IEnumerable<GospDiplom.WEB.Models.InputViewModels>*@
+﻿@model IEnumerable<GospDiplom.WEB.Models.InputViewModels>
 @{
     Layout = null;
 }
@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Add Numbers</title>
+    <title>Таблица показаний</title>
     <meta charset="utf-8" />
     <style type="text/css">
         body {
@@ -25,7 +25,18 @@
 </head>
 <body>
 
-    <p>Enter two whole numbers and then click <strong>Add</strong>.</p>
+    <hr />
+    <p>введите месяц и номер киоска и нажмите <strong>ПОКАЗАТЬ</strong>.</p>
+    <form action="" method="post">
+        <p>
+            <label for="text1">First Number:</label>
+            <input type="text" name="text1" />
+            &harr;
+            <label for="text2">Second Number:</label>
+            <input type="text" name="text2" />
+        </p>
+        <p><input type="submit" value="Add" /></p>
+    </form>
     <hr />
     <table>
 
@@ -51,55 +62,67 @@
     <hr />
     <table>
         <tr>
-            <td> Номер счетчика</td>
             <td>Номер киоска </td>
+            <td> Номер счетчика</td>
+            <td>Тариф 1 </td>
+            <td>Тариф 2 </td>
+            <td> Месяц</td>
             <td>Тех учет </td>
         </tr>
-        @foreach (var item in ViewBag.totalMessage)
+        @foreach (var item in Model)
         {
             <tr>
-                <td> @item.NomerSchetchika</td>
+                <td> @Html.DisplayFor(modelItem => item.Kiosk.Nomer)</td>
 
-                <td> @item.IdKiosk</td>
+                <td> @Html.DisplayFor(modelItem => item.Counetr.NomerSchetchika)</td>
 
-                <td>@item.TexUchet</td>
+                <td> @Html.DisplayFor(modelItem => item.Indication.Tarif1)</td>
+
+                <td> @Html.DisplayFor(modelItem => item.Indication.Tarif2)</td>
+
+                <td> @Html.DisplayFor(modelItem => item.OrgName)</td>
+
+                <td>@Html.DisplayFor(modelItem => item.Counetr.TexUchet)</td>
             </tr>
         }
     </table>
     <hr />
     <table>
         <tr>
-            <td> Киоск</td><td>Счетчик</td><td>Месяц</td><td>Показания</td>
+            <td> Киоск</td>
+            <td>Счетчик</td>
+            <td>Месяц</td>
+            <td>Показания</td>
         </tr>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.Kiosk.Nomer</td>
-                <td>@item.Counetr.SchetchikId</td>
-                <td>@item.Indication.Month.ToString("MMM")</td>
-                <td>@item.Indication.Tarif1</td>
-            </tr>
+            @*<tr>
+                    <td>@item.Kiosk.Nomer</td>
+                    <td>@item.Counetr.Nomer</td>
+                    <td>@item.Indication.Month.ToString("MMM")</td>
+                    <td>@item.Indication.Tarif1</td>
+                </tr>*@
         }
     </table>
 
 
-        @*<form action="" method="post">
-            <p>
-                <label for="text1">First Number:</label>
-                <text type="text" name="text1">
-                    @Model.Tarif1
+    @*<form action="" method="post">
+        <p>
+            <label for="text1">First Number:</label>
+            <text type="text" name="text1">
+                @Model.Tarif1
+                </text>
+                </p>
+                <p>
+                    <label for="text2">Second Number:</label>
+                    <text type="text" name="text2">
+                       @Model.Tarif2
                     </text>
-                    </p>
-                    <p>
-                        <label for="text2">Second Number:</label>
-                        <text type="text" name="text2">
-                           @Model.Tarif2
-                        </text>
-                    </p>
-                    <p><input type="submit" value="Add" /></p>
-                    </form>*@
+                </p>
+                <p><input type="submit" value="Add" /></p>
+                </form>*@
 
-        @*<p>@ViewBag.Message</p>*@
+    @*<p>@ViewBag.Message</p>*@
 
 </body>
 </html>

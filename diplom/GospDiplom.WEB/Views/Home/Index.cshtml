@@ -5,6 +5,19 @@
 }
 
 <h2>Таблица киосков</h2>
+<hr />
+<p>введите месяц и номер киоска и нажмите <strong>ПОКАЗАТЬ</strong>.</p>
+<form action="" method="post">
+    <p>
+        <label for="text1">First Number:</label>
+        <input type="text" name="text1" />
+    &harr;
+        <label for="text2">Second Number:</label>
+        <input type="text" name="text2" />
+    </p>
+    <p><input type="submit" value="Add" /></p>
+</form>
+<hr />
 
 <table class="table">
     <tr>
@@ -24,37 +37,43 @@
             Организация
         </th>
         <th>
+            Номер договора
+        </th>
+        <th>
             Аренда
         </th>
     </tr>
 
     @foreach (var item in Model)
     {
-<tr>
+        <tr>
 
-    <td>
-        @Html.DisplayFor(modelItem => item.Kiosk.Nomer)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Kiosk.ModelKioska)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Kiosk.Town)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Kiosk.Adress)
-    </td>
-    <td>
-        Html.DisplayFor(modelItem => item.OrgName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Kiosk.Arenda)
-    </td>
-    <td>
-       @Html.ActionLink("Редактировать", "MakeOrder", new { id = 1 })
-    </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kiosk.Nomer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kiosk.ModelKioska)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kiosk.Town)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kiosk.Adress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrgName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dogovor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kiosk.Arenda)
+            </td>
+            <td>
+                @Html.ActionLink("Редактировать", "MakeOrder", new { id = 1 })
+            </td>
 
-</tr>
+        </tr>
     }
 
 </table>

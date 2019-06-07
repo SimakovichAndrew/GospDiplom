@@ -11,5 +11,7 @@ namespace GospDiplom.WEB.Models
         public double Tarif2 { get; set; }
         public double TarifSumm { get; set; }
 
+
+        public int SchetchikId { get; set; }
     }
 }

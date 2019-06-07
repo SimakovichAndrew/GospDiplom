@@ -31,7 +31,7 @@ namespace GospDiplom.BLL.DTO
 
 
 
-        //public Nullable<int> OrganizationId { get; set; }
+        public Nullable<int> OrganizationId { get; set; }
 
         //public virtual Kiosk Organizations { get; set; }
     }

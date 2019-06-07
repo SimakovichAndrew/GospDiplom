@@ -12,10 +12,11 @@ namespace GospDiplom.WEB.Models
         //public IEnumerable<SchetchikDTO>GetSchetchiks { get; set; }
         //public IEnumerable<IndicationDTO> GetIndications { get; set; }
         public KioskViewModel Kiosk { get; set; }
-        //public SchetchikViewModel Counetr { get; set; }
-        //public IndicationViewModel Indication { get; set; }
+        public SchetchikViewModel Counetr { get; set; }
+        public IndicationViewModel Indication { get; set; }
         public OrganizationViewModel GetOrg { get; set; }
         public string OrgName { get; set; }
+        public int Dogovor { get; set; }
         //public IEnumerable<OrganizationDTO> GetOrgans { get; set; } 
         //public DateTime Month { get; set; }
         //public double Tarif1 { get; set; }
@@ -23,9 +24,6 @@ namespace GospDiplom.WEB.Models
         //public string Kiosk { get; set; }
         //public int Counter { get; set; }
 
-        public string GetMonth(DateTime date)
-        {
-            return date.ToString("MMM");
-        }
+        public string GetMonth(DateTime date) => date.ToString("MMM");
     }
 }

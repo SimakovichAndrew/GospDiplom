@@ -75,8 +75,10 @@ namespace GospDiplom.BLL.Services
         {
             // применяем автомаппер для проекции одной коллекции на другую
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Kiosk, KioskDTO>()).CreateMapper();
-            var temp= mapper.Map<IEnumerable<Kiosk>, List<KioskDTO>>(Database.Kiosks.GetAll());
-            int i = 0;
+            var temp = mapper.Map<IEnumerable<Kiosk>, List<KioskDTO>>(Database.Kiosks.GetAll());
+            //Mapper.Initialize(cfg => cfg.CreateMap<Kiosk, KioskDTO>());
+            //var temp = Mapper.Map<IEnumerable<Kiosk>, List<KioskDTO>>(Database.Kiosks.GetAll());
+            //int i = 0;
             return temp;
         }
 
