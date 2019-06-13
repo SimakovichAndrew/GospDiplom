@@ -83,7 +83,7 @@ namespace GospDiplom.WEB.Controllers
 
             return View(CounterInfo);
         }
-
+        
 
         [HttpPost]
         public ActionResult IndicationTemp (int nomer, string month)
@@ -92,17 +92,17 @@ namespace GospDiplom.WEB.Controllers
             if (nomer == 0)
             {
                 string mo = month;
-                return Redirect(Url.Action("IndicationAllKioskiOneMonth", new {month=mo  }));
+                return IndicationAllKioskiOneMonth(month);
             }
 
             if (month == "")
             {
                 int i = nomer;
-                return Redirect(Url.Action("IndicationOneKioskAllMonth", new { id = nomer })); }
+                return IndicationOneKioskAllMonth(nomer); }
             else
             {
 
-                return Redirect(Url.Action("IndicationOneKioskOneMonth", new { page = 1, nomer, month }));
+                return IndicationOneKioskOneMonth(nomer, month);
             }
 
         }
@@ -140,7 +140,7 @@ namespace GospDiplom.WEB.Controllers
 
             ViewBag.indicationKiosk = "One Month ALL Kiosk";
 
-            return Redirect(Url.Action("IndicationMonth"));
+            return IndicationMonth(CounterInfo);
         }
 
 
@@ -174,7 +174,7 @@ namespace GospDiplom.WEB.Controllers
 
             ViewBag.indicationKiosk = "One Kiosk ALL Month";
 
-            return Redirect(Url.Action("IndicationMonth"));
+            return IndicationMonth(CounterInfo);
         }
 
 
@@ -206,15 +206,17 @@ namespace GospDiplom.WEB.Controllers
                 }
             };
 
-            return Redirect(Url.Action("IndicationMonth"));
+            return IndicationMonth(CounterInfo);
         }
 
 
 
 
         [HttpGet]
-        public ViewResult IndicationMonth(ActionResult action)
+        public ViewResult IndicationMonth(SchetchikViewModel schetchikViewModel)
         {
+            var x = schetchikViewModel.AllCounters.ToList();
+            ViewData["SchetchikAllCounters"] = x;
             switch (viewTemp)
             {
                 case 1: return View("IndicationAllKioskiOneMonth");

@@ -7,77 +7,79 @@
 <h2>Таблица киосков</h2>
 <hr />
 <p>введите месяц и номер киоска и нажмите <strong>ПОКАЗАТЬ</strong>.</p>
-<form action="" method="post">
+@using (Html.BeginForm("IndicationTemp", "SchetchikInput", FormMethod.Post))
+{
     <p>
         <label for="text1">First Number:</label>
-        <input type="text" name="text1" />
+        <input type="text" name="Nomer" value="0"/>
         &harr;
         <label for="text2">Second Number:</label>
-        <input type="text" name="text2" />
+        <input type="text" name="Month" />
     </p>
     <p><input type="submit" value="Add" /></p>
-</form>
-<hr />
+   
+}
+    <hr />
 
-<table class="table">
-    <tr>
-        <th>
-            Номер киоска
-        </th>
-        <th>
-            Тип объекта
-        </th>
-        <th>
-            Город
-        </th>
-        <th>
-            Адрес
-        </th>
-        <th>
-            Организация
-        </th>
-        <th>
-            Номер договора
-        </th>
-        <th>
-            Аренда
-        </th>
-    </tr>
-
-    @foreach (var item in Model.AllKioski)
-    {
+    <table class="table">
         <tr>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.Nomer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModelCounter)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gorod)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Adress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrgName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dogovor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Arenda)
-            </td>
-            <td>
-                @Html.ActionLink("Редактировать", "MakeOrder", new { id = 1 })
-            </td>
-
+            <th>
+                Номер киоска
+            </th>
+            <th>
+                Тип объекта
+            </th>
+            <th>
+                Город
+            </th>
+            <th>
+                Адрес
+            </th>
+            <th>
+                Организация
+            </th>
+            <th>
+                Номер договора
+            </th>
+            <th>
+                Аренда
+            </th>
         </tr>
-    }
 
-</table>
-<div class="pager">
-    @Html.PageLinks(Model.PagingInfoCom, x => Url.Action("Index", new { page = x }))
-    @*@Html.PageLinks(Model.First().PagingInfoCom, x => Url.Action("Chat", new { page = x, category = Model.CurrentTopicName }))*@
-</div>
+        @foreach (var item in Model.AllKioski)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nomer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModelCounter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gorod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Adress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrgName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dogovor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Arenda)
+                </td>
+                <td>
+                    @Html.ActionLink("Редактировать", "MakeOrder", new { id = 1 })
+                </td>
+
+            </tr>
+        }
+
+    </table>
+    <div class="pager">
+        @Html.PageLinks(Model.PagingInfoCom, x => Url.Action("Index", new { page = x }))
+        @*@Html.PageLinks(Model.First().PagingInfoCom, x => Url.Action("Chat", new { page = x, category = Model.CurrentTopicName }))*@
+    </div>

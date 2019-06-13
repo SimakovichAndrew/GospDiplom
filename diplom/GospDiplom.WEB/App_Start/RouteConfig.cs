@@ -16,7 +16,7 @@ namespace GospDiplom.WEB
             routes.MapRoute(
               name: null,
               url: "Page{page}",
-              defaults: new { Controller = "Comment", action = "Chat" }
+              defaults: new { Controller = "Comment"/**/, action = "Chat"/**/ }
               );
 
             routes.MapRoute(
@@ -24,6 +24,12 @@ namespace GospDiplom.WEB
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Default2", 
+                url: "{controller}/{action}/{id}/{name}",
+                defaults: new { id = UrlParameter.Optional, name = UrlParameter.Optional });
+
         }
     }
 }
