@@ -23,31 +23,31 @@ namespace GospDiplom.WEB.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            IEnumerable<KioskDTO> commentDtos = db.GetKiosks();
-            var mapperkiosk = new MapperConfiguration(cfg => cfg.CreateMap<KioskDTO, KioskViewModel>()).CreateMapper();
-            var kiosks = mapperkiosk.Map<IEnumerable<KioskDTO>, List<KioskViewModel>>(commentDtos);
-            ViewBag.dinamic = kiosks;
+            //IEnumerable<KioskDTO> commentDtos = db.GetKiosks();
+            //var mapperkiosk = new MapperConfiguration(cfg => cfg.CreateMap<KioskDTO, KioskViewModel>()).CreateMapper();
+            //var kiosks = mapperkiosk.Map<IEnumerable<KioskDTO>, List<KioskViewModel>>(commentDtos);
+            //ViewBag.dinamic = kiosks;
 
-            IEnumerable<SchetchikDTO> counters = db.GetCounters();
-            var mappercounter = new MapperConfiguration(cfg => cfg.CreateMap<SchetchikDTO, SchetchikViewModel>()).CreateMapper();
-            var counter = mappercounter.Map<IEnumerable<SchetchikDTO>, List<SchetchikViewModel>>(counters);
+            //IEnumerable<SchetchikDTO> counters = db.GetCounters();
+            //var mappercounter = new MapperConfiguration(cfg => cfg.CreateMap<SchetchikDTO, SchetchikViewModel>()).CreateMapper();
+            //var counter = mappercounter.Map<IEnumerable<SchetchikDTO>, List<SchetchikViewModel>>(counters);
 
-            IEnumerable<IndicationDTO> indications = db.GetIndications();
-            var mapperindication = new MapperConfiguration(cfg => cfg.CreateMap<IndicationDTO, IndicationViewModel>()).CreateMapper();
-            var indication = mappercounter.Map<IEnumerable<IndicationDTO>, List<IndicationViewModel>>(indications);
+            //IEnumerable<IndicationDTO> indications = db.GetIndications();
+            //var mapperindication = new MapperConfiguration(cfg => cfg.CreateMap<IndicationDTO, IndicationViewModel>()).CreateMapper();
+            //var indication = mappercounter.Map<IEnumerable<IndicationDTO>, List<IndicationViewModel>>(indications);
 
             double total = 0;
 
             List<InputViewModels> listTotalInfo = new List<InputViewModels>();
-            for (int i = 0; i < counter.Count; i++)
+            for (int i = 0; i < db.GetCounters().Count(); i++)
             {
                 listTotalInfo.Add(new InputViewModels
                 {
 
-                    Counetr = counter.ElementAt(i),
-                    Kiosk = kiosks.Where(x => x.KioskId == counter.ElementAt(i).KioskId).First(),
-                    Indication = indication.Where(y => y.SchetchikId == counter.ElementAt(i).SchetchikId).First(),
-                    OrgName = indication.Where(y => y.SchetchikId == counter.ElementAt(i).SchetchikId).First().Month.ToString("MMMM")
+                    //Counetr = db.GetCounters().ElementAt(i),
+                    //Kiosk = db.GetKiosks().Where(x => x.KioskId == db.GetCounters().ElementAt(i).KioskId).First(),
+                    //Indication = db.GetIndications().Where(y => y.SchetchikId == db.GetCounters().ElementAt(i).SchetchikId).First(),
+                    //OrgName = db.GetIndications().Where(y => y.SchetchikId == db.GetCounters().ElementAt(i).SchetchikId).First().Month.ToString("MMMM")
                 });
             }
 

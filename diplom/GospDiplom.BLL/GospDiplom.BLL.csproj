@@ -51,7 +51,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\AllCounter.cs" />
+    <Compile Include="DTO\AllTable.cs" />
     <Compile Include="DTO\EquipmentDTO.cs" />
+    <Compile Include="DTO\EquipmentKioskDTO.cs" />
     <Compile Include="DTO\IndicationDTO.cs" />
     <Compile Include="DTO\KioskDTO.cs" />
     <Compile Include="DTO\OrganizationDTO.cs" />

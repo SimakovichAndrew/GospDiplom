@@ -10,6 +10,7 @@ namespace GospDiplom.BLL.DTO
         public string ModelEq { get; set; }
         public string TypeEq { get; set; }
         public int PowerEq { get; set; }
+        public int QuantityAll { get; set; }
 
     }
 }

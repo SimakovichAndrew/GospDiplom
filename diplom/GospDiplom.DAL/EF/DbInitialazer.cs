@@ -42,33 +42,35 @@ namespace GospDiplom.DAL.EF
                 new Organization{OrgName="КЖРЭУП", Dogovor= 5857, Telefon=0, Email= "energo-gomel@osp.by"}
             });
 
+            
+
             db.SaveChanges();
 
             db.Kiosks.AddRange(new List<Kiosk>
             {
                 new Kiosk
                 {
-                    Nomer="1", ModelKioska="Киоск", Arenda= new DateTime(2019, 9, 16), Town="Гомель, р-н Центр", Adress="ул. Трудовая, д. 3", OrganizationId=1
+                    Nomer="1", ModelKioska="Киоск", Arenda= new DateTime(2019, 9, 16), Town= Towns.Гомель, Adress="ул. Трудовая, д. 3", OrganizationId=1
                 },
                 new Kiosk
                 {
-                    Nomer="2", ModelKioska="Киоск",  Arenda= new DateTime(2019, 9, 16), Town="Гомель, р-н Центр", Adress="пр. Ленина, р-н Ж/Д техникума", OrganizationId=1
+                    Nomer="2", ModelKioska="Киоск",  Arenda= new DateTime(2019, 9, 16), Town= Towns.Ельск, Adress="пр. Ленина, р-н Ж/Д техникума", OrganizationId=23
                 },
                 new Kiosk
                 {
-                    Nomer="3", ModelKioska="Киоск", Arenda= new DateTime(2019, 9, 16), Town="Гомель, р-н Центр", Adress="ул. Крестянская, р-н т.ц. Космос", OrganizationId=1
+                    Nomer="3", ModelKioska="Киоск", Arenda= new DateTime(2019, 9, 16), Town= Towns.Калинковичи, Adress="ул. Крестянская, р-н т.ц. Космос", OrganizationId=25
                 },
                 new Kiosk
                 {
-                    Nomer="4", ModelKioska="Киоск", Arenda= new DateTime(2019, 9, 16), Town="Гомель, р-н Центр", Adress="ул. Рогачевская д.2а", OrganizationId=1
+                    Nomer="4", ModelKioska="Киоск", Arenda= new DateTime(2019, 9, 16), Town=Towns.Жлобин, Adress="ул. Рогачевская д.2а", OrganizationId=22
                 }
             });
 
 
             for (int i = 5; i < 210; i++)
             {
-                db.Kiosks.Add(new Kiosk { Nomer = i.ToString(), Arenda = new DateTime(2019, 9, 16), ModelKioska = "Киоск", OrganizationId=1, Town="Гомель" });
-           
+                db.Kiosks.Add(new Kiosk { Nomer = i.ToString(), Arenda = new DateTime(2019, 9, 16), ModelKioska = "Киоск", OrganizationId = 1, Town = Towns.Гомель });
+
             }
 
 
@@ -110,10 +112,10 @@ namespace GospDiplom.DAL.EF
 
             db.Equipments.AddRange(new List<Equipment>
             {
-                new Equipment{ModelEq="Диодная", TypeEq="лампа", PowerEq=8, Quantity=3},
-                 new Equipment{ModelEq="Люма", TypeEq="лампа", PowerEq=18, Quantity=5},
-                  new Equipment{ModelEq="Кас-1", TypeEq="Касса", PowerEq=10, Quantity=1},
-                   new Equipment{ModelEq="Маслянный", TypeEq="Обогреватель", PowerEq=1000, Quantity=1}
+                new Equipment{ModelEq="Диодная", TypeEq="лампа", PowerEq=8, QuantityAll=3},
+                 new Equipment{ModelEq="Люма", TypeEq="лампа", PowerEq=18, QuantityAll=5},
+                  new Equipment{ModelEq="Кас-1", TypeEq="Касса", PowerEq=10, QuantityAll=1},
+                   new Equipment{ModelEq="Маслянный", TypeEq="Обогреватель", PowerEq=1000, QuantityAll=1}
             });
 
             db.SaveChanges();

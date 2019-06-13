@@ -52,10 +52,13 @@
     <Compile Include="EF\DbInitialazer.cs" />
     <Compile Include="EF\GospContext.cs" />
     <Compile Include="Entities\Equipment.cs" />
+    <Compile Include="Entities\EquipmentKiosk.cs" />
     <Compile Include="Entities\Indication.cs" />
     <Compile Include="Entities\Kiosk.cs" />
     <Compile Include="Entities\Organization.cs" />
     <Compile Include="Entities\Schetchik.cs" />
+    <Compile Include="Entities\Section.cs" />
+    <Compile Include="Entities\Town.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

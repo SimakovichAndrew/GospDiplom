@@ -160,12 +160,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HtmlHelpers\PaigingHelpers.cs" />
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
     <Compile Include="Models\IndicationViewModel.cs" />
     <Compile Include="Models\InputViewModels.cs" />
     <Compile Include="Models\KioskViewModel.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\OrganizationViewModel.cs" />
+    <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\SchetchikViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\OrderModule.cs" />
@@ -210,6 +212,10 @@
     <Content Include="Views\Procedure\SchetchikInput.cshtml" />
     <Content Include="Views\SchetchikInput\Index.cshtml" />
     <Content Include="Views\Economic\Index.cshtml" />
+    <Content Include="Views\SchetchikInput\IndicationMonth.cshtml" />
+    <Content Include="Views\SchetchikInput\IndicationAllKioskiOneMonth.cshtml" />
+    <Content Include="Views\SchetchikInput\IndicationOneKioskAllMonth.cshtml" />
+    <Content Include="Views\SchetchikInput\IndicationOneKioskOneMonth.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -16,7 +16,7 @@ namespace GospDiplom.DAL.Interfaces
         /*IQueryable */
         IEnumerable<T> GetAll();
         T Get(int id);
-        IQueryable<T> GetTs();
+        IQueryable<T> GetTs(int i);
         T GetString(string nomer);
         IEnumerable<T> Find(Func<T, Boolean> predicate);
         void Create(T item);

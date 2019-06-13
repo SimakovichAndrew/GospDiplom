@@ -56,6 +56,11 @@ namespace GospDiplom.DAL.Repositories
             throw new NotImplementedException();
         }
 
+        public IQueryable<Equipment> GetTs(int i)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Equipment item)
         {
             db.Entry(item).State = EntityState.Modified;

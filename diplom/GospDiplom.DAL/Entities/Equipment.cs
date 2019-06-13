@@ -10,17 +10,20 @@ namespace GospDiplom.DAL.Entities
     {
         public Equipment()
         {
-            Kiosks = new HashSet<Kiosk>();
+            
         }
 
-        //[Required]
+        [Required]
+      
         public int EquipmentId { get; set; }
         public string ModelEq { get; set; }
         public string TypeEq { get; set; }
         public int PowerEq { get; set; }
-        public int Quantity { get; set; }
+        public int QuantityAll { get; set; }
 
-        public virtual ICollection<Kiosk> Kiosks { get; set; }
+        //[ForeignKey("EquipmentKiosk")]
+        //public int EquipmentKioskId { get; set; }
+        //public virtual EquipmentKiosk Equipmentkiosk { get; set; }
 
         //// Это свойство будет использоваться как внешний ключ
         //[ForeignKey("Kiosk")]

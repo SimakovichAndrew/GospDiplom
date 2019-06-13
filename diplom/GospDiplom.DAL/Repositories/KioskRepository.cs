@@ -57,6 +57,11 @@ namespace GospDiplom.DAL.Repositories
             throw new NotImplementedException();
         }
 
+        public IQueryable<Kiosk> GetTs(int i)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Kiosk item)
         {
             db.Entry(item).State = EntityState.Modified;

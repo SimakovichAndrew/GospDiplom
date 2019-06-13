@@ -55,9 +55,11 @@ namespace GospDiplom.DAL.Repositories
             //throw new NotImplementedException();
         }
 
-        public IQueryable<Organization> GetTs()
+        public IQueryable<Organization> GetTs(int i)
         {
-            throw new NotImplementedException();
+            return db.Organizations.Where(d => d.OrganizationId == db.Kiosks.ElementAt(i).OrganizationId);
+            
+            //throw new NotImplementedException();
         }
 
         public void Update(Organization item)

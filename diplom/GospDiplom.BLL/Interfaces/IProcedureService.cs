@@ -16,6 +16,13 @@ namespace GospDiplom.BLL.Interfaces
         IEnumerable<SchetchikDTO> GetCounters();//получение всех счетчиков
         IEnumerable<OrganizationDTO> GetOrganizations();
         OrganizationDTO GetOrganization(int? id);
+        IEnumerable<EquipmentDTO> GetEquipments();
+        EquipmentDTO GetEquipment(int? id);
+        IEnumerable<AllTable> GetAllKioski();
+        AllTable GetInfokiosk(int? id);
+        IEnumerable<AllCounter> GetAllCounters();
+        AllCounter GetInfoCounter(int? id);
+
         //void Dispose();// ???
     }
 }

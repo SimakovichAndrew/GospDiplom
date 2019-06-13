@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GospDiplom.WEB.Models.InputViewModels>
+﻿@model GospDiplom.WEB.Models.InputViewModels
 
 @{
     ViewBag.Title = "Таблица киосков";
@@ -11,7 +11,7 @@
     <p>
         <label for="text1">First Number:</label>
         <input type="text" name="text1" />
-    &harr;
+        &harr;
         <label for="text2">Second Number:</label>
         <input type="text" name="text2" />
     </p>
@@ -44,21 +44,21 @@
         </th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.AllKioski)
     {
         <tr>
 
             <td>
-                @Html.DisplayFor(modelItem => item.Kiosk.Nomer)
+                @Html.DisplayFor(modelItem => item.Nomer)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Kiosk.ModelKioska)
+                @Html.DisplayFor(modelItem => item.ModelCounter)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Kiosk.Town)
+                @Html.DisplayFor(modelItem => item.Gorod)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Kiosk.Adress)
+                @Html.DisplayFor(modelItem => item.Adress)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OrgName)
@@ -67,7 +67,7 @@
                 @Html.DisplayFor(modelItem => item.Dogovor)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Kiosk.Arenda)
+                @Html.DisplayFor(modelItem => item.Arenda)
             </td>
             <td>
                 @Html.ActionLink("Редактировать", "MakeOrder", new { id = 1 })
@@ -77,3 +77,7 @@
     }
 
 </table>
+<div class="pager">
+    @Html.PageLinks(Model.PagingInfoCom, x => Url.Action("Index", new { page = x }))
+    @*@Html.PageLinks(Model.First().PagingInfoCom, x => Url.Action("Chat", new { page = x, category = Model.CurrentTopicName }))*@
+</div>

@@ -22,6 +22,8 @@ namespace GospDiplom.WEB.Controllers
         //    Mapper.Initialize(cfg => cfg.CreateMap<KioskDTO, KioskViewModel>());
         //}
 
+        public int PageCom = 25;
+
         public HomeController(IProcedureService serv)
         {
             orderService = serv;
@@ -30,30 +32,68 @@ namespace GospDiplom.WEB.Controllers
 
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
-            IEnumerable<KioskDTO> kioskDtos = orderService.GetKiosks();
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<KioskDTO, KioskViewModel>()).CreateMapper();
-            List<KioskViewModel>  kiosks = mapper.Map<IEnumerable<KioskDTO>, List<KioskViewModel>>(kioskDtos);
-           
-            IEnumerable<OrganizationDTO> OrgDtos = orderService.GetOrganizations();
-            var mapperOrg = new MapperConfiguration(cfg => cfg.CreateMap<OrganizationDTO, OrganizationViewModel>()).CreateMapper();
-            var organization = mapperOrg.Map<IEnumerable<OrganizationDTO>, List<OrganizationViewModel>>(OrgDtos);
-            
+            //List<InputViewModels> listInput = new List<InputViewModels>();
+            //int i = 0;
+            //foreach (var item in orderService.GetKiosks())
+            //{
+            //    listInput.Add(new InputViewModels() { 
+            //        Kiosk = orderService.GetKiosks().ElementAt(i),
+            //        OrgName = orderService.GetOrganizations().Where(x => x.OrganizationId == orderService.GetKiosks().ElementAt(i).OrganizationId ).First().OrgName,
+            //        Dogovor = orderService.GetOrganizations().Where(d=>d.OrganizationId== orderService.GetKiosks().ElementAt(i).OrganizationId).First().Dogovor,
+            //        PagingInfo = new PagingInfo
+            //        {
+            //            CurrentPage = page,
+            //            ItemsPerPage = PageCom,
+            //            TotalItems = orderService.GetKiosks().Count()
+            //        },
+            //    });
+            //    i++;
+            //}
 
-            List<InputViewModels> listInput = new List<InputViewModels>();
-
-            for (int i=0; i<kiosks.Count;i++)
+           IEnumerable<AllTable> tableKioski = orderService.GetAllKioski();
+            ViewBag.totalInfo = tableKioski;
+            InputViewModels listInput = new InputViewModels
             {
-                listInput.Add(new InputViewModels() {
-                    Kiosk = kiosks.ElementAt(i),
-                    OrgName = organization.Where(x => x.OrganizationId == kiosks.ElementAt(i).OrganizationId ).First().OrgName,
-                    Dogovor = organization.Where(d=>d.OrganizationId==kiosks.ElementAt(i).OrganizationId).First().Dogovor
-                });
-            }
+                AllKioski = tableKioski
+                .Skip((page - 1) * PageCom)
+                .Take(PageCom),
+                PagingInfoCom = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageCom,
+                    TotalItems = orderService.GetAllKioski().Count()
+                }
 
-            return View(listInput);
+            };
+
+
+        //ChatListViewModel model = new ChatListViewModel
+        //{
+        //    TopicId = SelectTopicId,
+        //    GetComments = repository.GetComments()
+        //       .Where(p => topicname == null || p.ComTopicId == SelectTopicId)
+        //       .OrderBy(p => p.CommentId)
+        //       .Skip((page - 1) * PageCom)
+        //       .Take(PageCom),
+        //    PagingInfo = new PagingInfo
+        //    {
+        //        CurrentPage = page,
+        //        ItemsPerPage = PageCom,
+        //        TotalItems = topicname == null ?
+        //        repository.GetComments().Count() :
+        //        repository.GetComments().Where(e => e.ComTopicName == topicname).Count()
+        //    },
+        //    CurrentTopicName = topicname,
+        //    Autor = User.Identity.Name
+        //};
+
+  return View(listInput);
         }
+
+
+
 
 
         public ActionResult MakeOrder()

@@ -21,7 +21,7 @@ namespace GospDiplom.DAL.Entities
         public string Nomer { get; set; }
         public string ModelKioska { get; set; }
         public Nullable<DateTime> Arenda { get; set; }
-        public string Town { get; set; }
+        public Towns Town { get; set; }
         public string Adress { get; set; }
         public double Area { get; set; }
 
@@ -34,11 +34,20 @@ namespace GospDiplom.DAL.Entities
         [ForeignKey("Organization")]
         public Nullable<int> OrganizationId { get; set; }
         //ссылка на контрагента
-        public virtual Kiosk Organization { get; set; }
+        public virtual Organization Organization { get; set; }
+
+        public virtual Section Section { get; set; }
+
         //// Это свойство будет использоваться как внешний ключ
         //[ForeignKey("Equipment")]
         //public Nullable<int> EquipmentId { get; set; }
-        ////ссылка на оборудование
-        //public virtual Equipment Equipment { get; set; }
+        //ссылка на оборудование
+        public virtual ICollection<EquipmentKiosk> EquipmentKiosk { get; set; }
     }
+
+   public enum Towns
+    {
+        Гомель, Ветка, БудаКошелёва, Добруш, Речица, Хойники, Жлобин, Рогачев, Корма, Брагин, Лоев, Чечерск, Светлогорск, Октябрьский, Мозырь, Калинковичи, Петриков, Житковичи, Туров, Наровля, Ельск, Лельчицы 
+    }
+
 }
