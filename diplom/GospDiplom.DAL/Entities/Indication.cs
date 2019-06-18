@@ -16,11 +16,10 @@ namespace GospDiplom.DAL.Entities
         public double Tarif1 { get; set; }
         public double Tarif2 { get; set; }
         public double TarifSumm { get; set; }
+        public bool Archive { get; set; }
 
         [ForeignKey("Schetchik")]
         public int SchetchikId { get; set; }
         public virtual Schetchik Schetchik { get; set; }
-
-       
     }
 }

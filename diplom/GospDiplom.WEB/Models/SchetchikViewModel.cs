@@ -11,4 +11,5 @@ namespace GospDiplom.WEB.Models
         public IEnumerable<AllCounter> AllCounters { get; set; }
         public PagingInfo PagingInfoCom { get; set; }
     }
+
 }

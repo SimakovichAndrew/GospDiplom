@@ -16,5 +16,6 @@ namespace GospDiplom.BLL.DTO
         public bool TwoTarif { get; set; }
         public Nullable<DateTime > Poverka { get; set; }
         public int Poteri { get; set; }
+        public bool Archive { get; set; }
     }
 }

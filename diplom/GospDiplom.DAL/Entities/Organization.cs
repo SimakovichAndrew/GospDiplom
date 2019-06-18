@@ -19,6 +19,7 @@ namespace GospDiplom.DAL.Entities
         public int Dogovor { get; set; }
         public int Telefon { get; set; }
         public string Email { get; set; }
+        public int Limit { get; set; }
 
         public virtual ICollection<Kiosk> Kiosks { get; set; }
  

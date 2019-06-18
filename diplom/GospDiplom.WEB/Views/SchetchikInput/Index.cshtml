@@ -1,10 +1,11 @@
 ﻿@model GospDiplom.WEB.Models.SchetchikViewModel
 @{
-    Layout = null;
+    ViewBag.Title = "Показания счетчиков";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-<!DOCTYPE html>
+@*<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Таблица показаний</title>
@@ -23,29 +24,15 @@
         }
     </style>
 </head>
-<body>
+<body>*@
 
-    <hr />
-    <div>
-        <p>введите месяц и номер киоска и нажмите <strong>ПОКАЗАТЬ</strong>.</p>
-        @using (Html.BeginForm("IndicationTemp", "SchetchikInput", FormMethod.Post))
-        {
-            <div>
-                <label for= "text1" > Номер киоска:</label >
-                <input type = "text" name = "Nomer" />
-                &harr;
-                <label for= "text2" > Месяц:</label >
-                <input type = "text" name = "Month" />
-            </div>
-            <p><input type = "submit" value = "Показать" /></p>
-
-        }
-    </div>
-        <hr />
-
+  
+    @if (ViewBag.Temp != 0)
+    {
         @Html.Partial("IndicationMonth")
+    }
 
-        <hr />
+    @*<hr />
         <table>
             <tr>
                 <td>Номер киоска </td>
@@ -80,17 +67,17 @@
 
                     <td> @Html.DisplayFor(modelItem => item.OrgName)</td>
 
-                    <td>@Html.DisplayFor(modelItem => item.Dogovor)</td>
+                    <td> @Html.DisplayFor(modelItem => item.Dogovor)</td>
                 </tr>
             }
         </table>
-        <hr />
+        <hr />*@
 
 
-        <div class="pager">
-            @Html.PageLinks(Model.PagingInfoCom, x => Url.Action("Index", new { page = x }))
-            @*@Html.PageLinks(Model.First().PagingInfoCom, x => Url.Action("Chat", new { page = x, category = Model.CurrentTopicName }))*@
-        </div>
-</body>
-</html>
+    <div class="pager">
+        @Html.PageLinks(Model.PagingInfoCom, x => Url.Action("Index", new { page = x }))
+        @*@Html.PageLinks(Model.First().PagingInfoCom, x => Url.Action("Chat", new { page = x, category = Model.CurrentTopicName }))*@
+    </div>
+@*</body>
+</html>*@
 
