@@ -122,16 +122,16 @@ namespace GospDiplom.DAL.EF
 
             db.Indications.AddRange(new List<Indication>
             {
-                new Indication{Tarif1=0.5, Tarif2=2.5, Month=new DateTime(2019, 12, 16), SchetchikId=1 },
+                new Indication{Tarif1=0.5, Tarif2=2.5, Month=new DateTime(2019, 7, 16), SchetchikId=1 },
                 new Indication{Tarif1=1.5, Tarif2=3.5, Month=new DateTime(2019, 3, 16), SchetchikId=2 },
                 new Indication{Tarif1=4.5, Tarif2=5.5, Month=new DateTime(2019, 1, 16), SchetchikId=3 },
                 new Indication{Tarif1=6.5, Tarif2=7.5, Month=new DateTime(2019, 2, 16), SchetchikId=4 },
-                new Indication{Tarif1=8.5, Tarif2=9.5, Month=new DateTime(2019, 7, 16), SchetchikId=5 },
+                new Indication{Tarif1=8.5, Tarif2=9.5, Month=new DateTime(2019, 5, 16), SchetchikId=5 },
                 new Indication{Tarif1=10.5, Tarif2=12.5, Month=new DateTime(2019, 9, 16), SchetchikId=6 },
                 new Indication{Tarif1=14.5, Tarif2=15.5, Month=new DateTime(2019, 10, 16), SchetchikId=7 },
-                new Indication{Tarif1=1.5, Tarif2=3.5, Month=new DateTime(2019, 1, 16), SchetchikId=1 },
-                new Indication{Tarif1=4.5, Tarif2=5.5, Month=new DateTime(2019, 2, 16), SchetchikId=1 },
-                new Indication{Tarif1=6.5, Tarif2=7.5, Month=new DateTime(2019, 3, 16), SchetchikId=1 },
+                new Indication{Tarif1=1.0, Tarif2=3.0, Month=new DateTime(2019, 1, 16), SchetchikId=1 },
+                new Indication{Tarif1=4.0, Tarif2=5.0, Month=new DateTime(2019, 4, 16), SchetchikId=1 },
+                new Indication{Tarif1=6.0, Tarif2=7.0, Month=new DateTime(2019, 3, 16), SchetchikId=1 },
             });
 
             db.SaveChanges();

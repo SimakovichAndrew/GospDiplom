@@ -36,7 +36,9 @@ namespace GospDiplom.WEB.Controllers
             //var mapperindication = new MapperConfiguration(cfg => cfg.CreateMap<IndicationDTO, IndicationViewModel>()).CreateMapper();
             //var indication = mappercounter.Map<IEnumerable<IndicationDTO>, List<IndicationViewModel>>(indications);
 
+#pragma warning disable CS0219 // Переменной "total" присвоено значение, но оно ни разу не использовано.
             double total = 0;
+#pragma warning restore CS0219 // Переменной "total" присвоено значение, но оно ни разу не использовано.
 
             List<InputViewModels> listTotalInfo = new List<InputViewModels>();
             for (int i = 0; i < db.GetCounters().Count(); i++)

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GospDiplom.WEB", "GospDiplo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GospDiplom.BLL", "GospDiplom.BLL\GospDiplom.BLL.csproj", "{22CEE534-6777-4FBD-B7C4-BE6265793836}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GospDiplom.WEBTests", "GospDiplom.WEBTests\GospDiplom.WEBTests.csproj", "{EDB8BA4A-6DF0-4E32-BA70-29AB78DE6C3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{22CEE534-6777-4FBD-B7C4-BE6265793836}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22CEE534-6777-4FBD-B7C4-BE6265793836}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22CEE534-6777-4FBD-B7C4-BE6265793836}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDB8BA4A-6DF0-4E32-BA70-29AB78DE6C3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDB8BA4A-6DF0-4E32-BA70-29AB78DE6C3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDB8BA4A-6DF0-4E32-BA70-29AB78DE6C3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDB8BA4A-6DF0-4E32-BA70-29AB78DE6C3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

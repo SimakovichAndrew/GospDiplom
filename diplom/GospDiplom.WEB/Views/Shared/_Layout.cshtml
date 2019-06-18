@@ -30,89 +30,139 @@
     </div>
 
     @*<form>
-        <div class="nativeDatePicker">
-            <label for="month-visit">What month would you like to visit us?</label>
-            <input type="month" id="month-visit" name="month-visit">
-            <span class="validity"></span>
-        </div>
-        <p class="fallbackLabel">What month would you like to visit us?</p>
-        <div class="fallbackDatePicker">
-            <div>
-                <span>
-                    <label for="month">Month:</label>
-                    <select id="month" name="month">
-                        <option selected>January</option>
-                        <option>February</option>
-                        <option>March</option>
-                        <option>April</option>
-                        <option>May</option>
-                        <option>June</option>
-                        <option>July</option>
-                        <option>August</option>
-                        <option>September</option>
-                        <option>October</option>
-                        <option>November</option>
-                        <option>December</option>
-                    </select>
-                </span>
-                <span>
-                    <label for="year">Year:</label>
-                    <select id="year" name="year"></select>
-                </span>
+            <div class="nativeDatePicker">
+                <label for="month-visit">What month would you like to visit us?</label>
+                <input type="month" id="month-visit" name="month-visit">
+                <span class="validity"></span>
             </div>
+            <p class="fallbackLabel">What month would you like to visit us?</p>
+            <div class="fallbackDatePicker">
+                <div>
+                    <span>
+                        <label for="month">Month:</label>
+                        <select id="month" name="month">
+                            <option selected>January</option>
+                            <option>February</option>
+                            <option>March</option>
+                            <option>April</option>
+                            <option>May</option>
+                            <option>June</option>
+                            <option>July</option>
+                            <option>August</option>
+                            <option>September</option>
+                            <option>October</option>
+                            <option>November</option>
+                            <option>December</option>
+                        </select>
+                    </span>
+                    <span>
+                        <label for="year">Year:</label>
+                        <select id="year" name="year"></select>
+                    </span>
+                </div>
+            </div>
+        </form>*@
+
+
+
+
+    @*@using (Html.BeginForm("IndicationTemp", "SchetchikInput", FormMethod.Post))
+        {
+            <input type="hidden" value="@ViewBag.BookId" name="BookId" />
+            <table>
+                <tr>
+                    <td><p>Введите свое имя </p></td>
+                    <td><input type="text" name="Person" /> </td>
+                </tr>
+                <tr>
+                    <td><p>Введите адрес :</p></td>
+                    <td><input type="text" name="Address" /> </td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Отправить" /> </td>
+                    <td></td>
+                </tr>
+            </table>
+        }*@
+
+
+
+    @using (Html.BeginForm("IndicationTemp", "SchetchikInput", FormMethod.Post))
+    {
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Введите номер киоска и месяц показаний</span>
+            </div>
+            @*<input type="hidden" value="@ViewBag.BookId" name="BookId" />*@
+            <input type="text" name="Nomer" value="0" aria-label="номер киоска" class="form-control" />
+
+            @Html.DropDownList("Month", new SelectList(new string[] { "", "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" }))
+            <table>
+                @* <tr>
+                        <td><p>Введите свое имя </p></td>
+                        <td><input type="text" name="Person" /> </td>
+                    </tr>
+                    <tr>
+                        <td><p>Введите адрес :</p></td>
+                        <td><input type="text" name="Address" /> </td>
+                    </tr>*@
+                <tr>
+                    <td>
+                        <div>
+                            <!-- Default inline 1-->
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" checked class="custom-control-input" value="1" id="defaultInline1" name="checkSort">
+                                <label class="custom-control-label" for="defaultInline1">по номеру киоска</label>
+                            </div>
+
+                            <!-- Default inline 2-->
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" value="2" id="defaultInline2" name="checkSort">
+                                <label class="custom-control-label" for="defaultInline2">по месяцу</label>
+                            </div>
+
+                            <!-- Default inline 3-->
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" value="3" id="defaultInline3" name="checkSort">
+                                <label class="custom-control-label" for="defaultInline3">по потреблению</label>
+                            </div>
+                        </div>
+
+                        <button type="submit" value="показать" class="btn btn-primary" @*data-toggle="button"*@ aria-pressed="false" autocomplete="off">
+                            показать
+                        </button>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
         </div>
-    </form>*@
+    }
 
 
 
 
 
+
+    <hr />
+    @*@using (Html.BeginForm("IndicationTemp", "SchetchikInput", FormMethod.Post))*@
+    @using (Html.BeginForm("IndicationTemp", "SchetchikInput", FormMethod.Post))
+    {
+
+
+
+    }
 
 
     <div class="container body-content">
         <hr />
-       @using (Html.BeginForm("IndicationTemp", "SchetchikInput", FormMethod.Post))
-        {
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Введите номер киоска и месяц показаний</span>
-                </div>
-                <input type="text" name="Nomer" value="0" aria-label="First name" class="form-control" />
-                @Html.DropDownList("month", new SelectList(new string[] { "", "январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь" }))
-            </div>
-            <div>
-                <!-- Default inline 1-->
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" class="custom-control-input" value="1" id="defaultInline1" name="checkSort">
-                    <label class="custom-control-label" for="defaultInline1">по номеру киоска</label>
-                </div>
-
-                <!-- Default inline 2-->
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" class="custom-control-input" value="2" id="defaultInline2" name="checkSort">
-                    <label class="custom-control-label" for="defaultInline2">по месяцу</label>
-                </div>
-
-                <!-- Default inline 3-->
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" class="custom-control-input" value="3" id="defaultInline3" name="checkSort">
-                    <label class="custom-control-label" for="defaultInline3">по потреблению</label>
-                </div>
-            </div>
-
-            <button type="submit" value="показать" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
-                показать
-            </button>
-        }
-
-        <hr />
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year – разработка Симакович</p>
-            @*<p>@Html.ActionLink("Ввод показаний", "Index", "SchetchikInput")</p>*@
-        </footer>
     </div>
+    <footer>
+        <p>&copy; @DateTime.Now.Year – разработка Симакович</p>
+        @*<p>@Html.ActionLink("Ввод показаний", "Index", "SchetchikInput")</p>*@
+    </footer>
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

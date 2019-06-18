@@ -15,7 +15,7 @@ namespace GospDiplom.WEB.Controllers
     public class SchetchikInputController : Controller
     {
         IProcedureService db;
-      // int  viewTemp = 0;
+        // int  viewTemp = 0;
 
         public SchetchikInputController(IProcedureService orderService)
         {
@@ -24,30 +24,30 @@ namespace GospDiplom.WEB.Controllers
 
         // GET: Temp
         [HttpGet]
-        public ActionResult Index(int page=1)
+        public ActionResult Index(int page = 1)
         {
             for (int i = 0; i < 1; i++)
             {
 
-            
-            //IEnumerable<KioskDTO> commentDtos = db.GetKiosks();
-            //var mapperkiosk = new MapperConfiguration(cfg => cfg.CreateMap<KioskDTO, KioskViewModel>()).CreateMapper();
-            //var kiosks = mapperkiosk.Map<IEnumerable<KioskDTO>, List<KioskViewModel>>(commentDtos);
-            //ViewBag.dinamic = kiosks;
 
-            //IEnumerable<SchetchikDTO> counters = db.GetCounters();
-            //var mappercounter = new MapperConfiguration(cfg => cfg.CreateMap<SchetchikDTO, SchetchikViewModel>()).CreateMapper();
-            //var counter = mappercounter.Map<IEnumerable<SchetchikDTO>, List<SchetchikViewModel>>(counters);
+                //IEnumerable<KioskDTO> commentDtos = db.GetKiosks();
+                //var mapperkiosk = new MapperConfiguration(cfg => cfg.CreateMap<KioskDTO, KioskViewModel>()).CreateMapper();
+                //var kiosks = mapperkiosk.Map<IEnumerable<KioskDTO>, List<KioskViewModel>>(commentDtos);
+                //ViewBag.dinamic = kiosks;
 
-            //IEnumerable<IndicationDTO> indications = db.GetIndications();
-            //var mapperindication = new MapperConfiguration(cfg => cfg.CreateMap<IndicationDTO, IndicationViewModel>()).CreateMapper();
-            //var indication = mappercounter.Map<IEnumerable<IndicationDTO>, List<IndicationViewModel>>(indications);
-          }
+                //IEnumerable<SchetchikDTO> counters = db.GetCounters();
+                //var mappercounter = new MapperConfiguration(cfg => cfg.CreateMap<SchetchikDTO, SchetchikViewModel>()).CreateMapper();
+                //var counter = mappercounter.Map<IEnumerable<SchetchikDTO>, List<SchetchikViewModel>>(counters);
+
+                //IEnumerable<IndicationDTO> indications = db.GetIndications();
+                //var mapperindication = new MapperConfiguration(cfg => cfg.CreateMap<IndicationDTO, IndicationViewModel>()).CreateMapper();
+                //var indication = mappercounter.Map<IEnumerable<IndicationDTO>, List<IndicationViewModel>>(indications);
+            }
 
 
             IEnumerable<AllCounter> listTotalInfo = db.GetAllCounters();
-            int PageCom = 10;
-             ViewBag.Temp = 0;//индикация для partialView index SchetchikInput
+            int PageCom = 5;
+            ViewBag.Temp = 0;//индикация для partialView index SchetchikInput
 
             SchetchikViewModel CounterInfo = new SchetchikViewModel
             {
@@ -73,39 +73,59 @@ namespace GospDiplom.WEB.Controllers
             //        //OrgName = db.GetIndications().Where(y => y.SchetchikId == db.GetCounters().ElementAt(i).SchetchikId).First().Month.ToString("MMMM")
             //    });
 
-                //InputViewModels countes = new InputViewModels();
-                //countes.Kiosk = new KioskViewModel { Kiosk = kiosks.ElementAt(i).Kiosk, Nomer = kiosks.ElementAt(i).Nomer, Town = kiosks.ElementAt(i).Town };
-                //countes.Counetr = new SchetchikViewModel { SchetchikId = counters.ElementAt(i).SchetchikId/*, IdKiosk = counters.ElementAt(i).Kiosk.KioskId*/ };//(counters.Where(p => p.Kiosk.Nomer == i.ToString()).First()).SchetchikId
-                //countes.Indication = new IndicationViewModel { IndicationId = indication.ElementAt(i).IndicationId, Tarif1 = indication.ElementAt(i).Tarif1, Month = indication.ElementAt(i).Month};
-               
+            //InputViewModels countes = new InputViewModels();
+            //countes.Kiosk = new KioskViewModel { Kiosk = kiosks.ElementAt(i).Kiosk, Nomer = kiosks.ElementAt(i).Nomer, Town = kiosks.ElementAt(i).Town };
+            //countes.Counetr = new SchetchikViewModel { SchetchikId = counters.ElementAt(i).SchetchikId/*, IdKiosk = counters.ElementAt(i).Kiosk.KioskId*/ };//(counters.Where(p => p.Kiosk.Nomer == i.ToString()).First()).SchetchikId
+            //countes.Indication = new IndicationViewModel { IndicationId = indication.ElementAt(i).IndicationId, Tarif1 = indication.ElementAt(i).Tarif1, Month = indication.ElementAt(i).Month};
+
 
             // listTotalInfo.Add(countes);
             // }
 
             return View(CounterInfo);
         }
-        
+
 
         [HttpPost]
-        public ActionResult IndicationTemp (int nomer, string month)
+        public ActionResult IndicationTemp(int nomer, string month, string checkSort)
         {
-                
-            if (nomer == 0)
+            ViewBag.Sort = checkSort;
+
+            if (nomer == 0 && month != "")
             {
                 //string mo = month;
                 return IndicationAllKioskiOneMonth(month);
             }
-
-            if (month.ToString() == "")
-            {
-                int i = nomer;
-                return IndicationOneKioskAllMonth(nomer); }
             else
             {
+                if (month == "" && nomer != 0)
+                {
+                    int i = nomer;
+                    return IndicationOneKioskAllMonth(nomer);
+                }
+                else
+                {
+                    if (month != "" && nomer != 0)
+                        return IndicationOneKioskOneMonth(nomer, month);
+                    else
+                    {
+                        SchetchikViewModel schetchikViewModel = new SchetchikViewModel()
+                        {
+                            AllCounters = new List<AllCounter>()
+                        };
 
-                return IndicationOneKioskOneMonth(nomer, month);
+                        string sort = ViewBag.Sort;
+                        switch (sort)
+                        {
+                            case "2": schetchikViewModel.AllCounters.OrderBy(y => y.Date); break;
+                            case "3": schetchikViewModel.AllCounters.OrderBy(y => (y.Tarif2 - y.Tarif1)); break;
+                            default: schetchikViewModel.AllCounters.OrderBy(y => y.NomerKioska); break;
+                        }
+
+                        return IndicationMonth(schetchikViewModel);
+                    }
+                }
             }
-
         }
 
 
@@ -119,13 +139,13 @@ namespace GospDiplom.WEB.Controllers
         public ActionResult IndicationAllKioskiOneMonth(string month, int page = 1)
         {
             IEnumerable<AllCounter> listTotalInfo = db.GetAllCounters();
-            int PageCom = 10;
+            int PageCom = 5;
             ViewBag.Month = month;
 
             SchetchikViewModel CounterInfo = new SchetchikViewModel
             {
                 AllCounters = listTotalInfo
-                .Where(x=>x.Month==month)
+                .Where(x => x.Month == month)
                 .Skip((page - 1) * PageCom)
                 .Take(PageCom),
                 PagingInfoCom = new PagingInfo
@@ -136,7 +156,7 @@ namespace GospDiplom.WEB.Controllers
                 }
 
             };
-           // viewTemp = 1;
+            // viewTemp = 1;
 
 
             ViewBag.indicationKiosk = "One Month ALL Kiosk";
@@ -151,8 +171,9 @@ namespace GospDiplom.WEB.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult IndicationOneKioskAllMonth(int nomer, int page=1)
+        public ActionResult IndicationOneKioskAllMonth(int nomer, int page = 1)
         {
+
             IEnumerable<AllCounter> listTotalInfo = db.GetAllCounters();
             int PageCom = 10;
             ViewBag.Nomer = nomer;
@@ -160,7 +181,7 @@ namespace GospDiplom.WEB.Controllers
             SchetchikViewModel CounterInfo = new SchetchikViewModel
             {
                 AllCounters = listTotalInfo
-              .Where(x => x.NomerKioska==nomer.ToString())
+              .Where(x => x.NomerKioska == nomer.ToString())
               .Skip((page - 1) * PageCom)
               .Take(PageCom),
                 PagingInfoCom = new PagingInfo
@@ -170,10 +191,15 @@ namespace GospDiplom.WEB.Controllers
                     TotalItems = db.GetAllCounters().Count()
                 }
             };
-
-           // viewTemp = 2;
-
             ViewBag.indicationKiosk = "One Kiosk ALL Month";
+
+            string sort = ViewBag.Sort;
+            switch (sort)
+            {
+                case "2": CounterInfo.AllCounters.OrderBy(y => y.Date); break;
+                case "3": CounterInfo.AllCounters.OrderBy(y => (y.Tarif2 - y.Tarif1)); break;
+                default: CounterInfo.AllCounters.OrderBy(y => y.NomerKioska); break;
+            }
 
             return IndicationMonth(CounterInfo);
         }
@@ -187,7 +213,7 @@ namespace GospDiplom.WEB.Controllers
         }
 
         [HttpPost]
-        public ActionResult IndicationOneKioskOneMonth(int nomer, string month, int page=1 )
+        public ActionResult IndicationOneKioskOneMonth(int nomer, string month, int page = 1)
         {
             IEnumerable<AllCounter> listTotalInfo = db.GetAllCounters();
             int PageCom = 10;
@@ -196,7 +222,7 @@ namespace GospDiplom.WEB.Controllers
             SchetchikViewModel CounterInfo = new SchetchikViewModel
             {
                 AllCounters = listTotalInfo
-              .Where(x => x.NomerKioska == nomer.ToString()&& x.Month==month)
+              .Where(x => x.NomerKioska == nomer.ToString() && x.Month == month)
               .Skip((page - 1) * PageCom)
               .Take(PageCom),
                 PagingInfoCom = new PagingInfo
@@ -215,27 +241,30 @@ namespace GospDiplom.WEB.Controllers
 
 
         [HttpGet]
-        public ViewResult IndicationMonth(SchetchikViewModel schetchikViewModel, int page=1)
+        public ViewResult IndicationMonth(SchetchikViewModel schetchikViewModel, int page = 1)
         {
-           // viewTemp = 3;
+            // viewTemp = 3;
             ViewBag.Temp = 1;//индикация для partialView index SchetchikInput
+            SchetchikViewModel CounterInfo=null;
+            List<AllCounter> x = null;
+            
 
-            if (schetchikViewModel.AllCounters.Count()!=0)
-            { 
-            var x = schetchikViewModel.AllCounters.ToList();
-                ViewData["SchetchikAllCounters"] = x;
+            if (schetchikViewModel.AllCounters.Count() != 0)
+            {
+                CounterInfo = schetchikViewModel;
+               // x = schetchikViewModel.AllCounters.ToList();
+                //ViewData["SchetchikAllCounters"] = x;
             }
             else
             {
                 IEnumerable<AllCounter> listTotalInfo = db.GetAllCounters();
                 int PageCom = 10;
 
-
-                SchetchikViewModel CounterInfo = new SchetchikViewModel
+                CounterInfo = new SchetchikViewModel
                 {
                     AllCounters = listTotalInfo
-                    .Skip((page - 1) * PageCom)
-                    .Take(PageCom),
+                     .Skip((page - 1) * PageCom)
+                     .Take(PageCom),
                     PagingInfoCom = new PagingInfo
                     {
                         CurrentPage = page,
@@ -244,17 +273,22 @@ namespace GospDiplom.WEB.Controllers
                     }
 
                 };
-                var x = CounterInfo.AllCounters.ToList();
-                ViewData["SchetchikAllCounters"] = x;
+
+               // x = CounterInfo.AllCounters.OrderBy(y=>y.Date).ToList();
+
+                //ViewData["SchetchikAllCounters"] = x;
             }
 
-            //switch (viewTemp)
+
+
+            //string sort = ViewBag.Sort;
+            //switch (sort)
             //{
-            //    case 1: return View("IndicationAllKioskiOneMonth");
-            //    case 2: return View("IndicationOneKioskAllMonth");
-            //    case 3: return View("IndicationMonth");
-            //    default: return View("IndicationOneKioskOneMonth");
+            //    case "2": x = CounterInfo.AllCounters.OrderBy(y => y.Date).ToList(); break;
+            //    case "3": x = CounterInfo.AllCounters.OrderBy(y => (y.Tarif1+y.Tarif2)).ToList(); break;
+            //    default: x = CounterInfo.AllCounters.OrderBy(y => y.NomerKioska).ToList(); break;
             //}
+            ViewData["SchetchikAllCounters"] = CounterInfo.SortCounter(ViewBag.Sort);
 
             return View("IndicationMonth");
         }

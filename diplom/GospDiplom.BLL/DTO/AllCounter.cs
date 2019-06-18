@@ -18,5 +18,6 @@ namespace GospDiplom.BLL.DTO
         public string Month { get; set; }
         public string OrgName { get; set; }
         public int Dogovor { get; set; }
+        public DateTime Date { get; set; }
     }
 }

@@ -13,6 +13,7 @@ namespace GospDiplom.WEB.Models
         public IEnumerable<AllTable> AllKioski { get; set; }
         public PagingInfo PagingInfoCom { get; set; }
 
+
         //public IEnumerable<KioskDTO> GetKiosks { get; set; }
         //public IEnumerable<SchetchikDTO> GetSchetchiks { get; set; }
         //public IEnumerable<OrganizationDTO> GetOrgans { get; set; }

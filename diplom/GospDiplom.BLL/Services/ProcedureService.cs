@@ -304,8 +304,8 @@ namespace GospDiplom.BLL.Services
                     TechUchet = GetInfoCounter.ElementAt(i).TexUchet,
                     TwoTarif = GetInfoCounter.ElementAt(i).TwoTarif,
                     OrgName = GetInfoCounter.ElementAt(i).OrgName,
-                    Dogovor = GetInfoCounter.ElementAt(i).Dogovor
-
+                    Dogovor = GetInfoCounter.ElementAt(i).Dogovor,
+                    Date = GetInfoCounter.ElementAt(i).Month
                 }
                 );
 
