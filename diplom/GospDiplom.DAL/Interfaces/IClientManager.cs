@@ -1,4 +1,4 @@
-﻿using ForumMVC.Domain.Entities;
+﻿using GospDiplom.DAL.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ForumMVC.Domain.Interfaces
+namespace GospDiplom.DAL.Interfaces
 {
     //Данный интерфейс содержит один метод для создания нового профиля пользователя.
     public interface IClientManager : IDisposable

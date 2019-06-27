@@ -1,6 +1,6 @@
 ﻿using GospDiplom.WEB.Models;
 using System;
-using System.Text; 
+using System.Text;
 using System.Web.Mvc;
 
 

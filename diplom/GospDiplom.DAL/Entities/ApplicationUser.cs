@@ -1,4 +1,4 @@
-﻿using ForumMVC.Domain.Repositories;
+﻿using GospDiplom.DAL.Repositories;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ForumMVC.Domain.Entities
+namespace GospDiplom.DAL.Entities
 {
     public class ApplicationUser :IdentityUser
     {

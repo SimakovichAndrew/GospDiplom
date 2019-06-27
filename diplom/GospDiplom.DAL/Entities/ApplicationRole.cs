@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ForumMVC.Domain.Entities
+namespace GospDiplom.DAL.Entities
 {
     public class ApplicationRole : IdentityRole
     {

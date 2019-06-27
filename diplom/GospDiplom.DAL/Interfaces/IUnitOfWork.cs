@@ -1,4 +1,5 @@
 ﻿using GospDiplom.DAL.Entities;
+using GospDiplom.DAL.Identity;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +14,11 @@ namespace GospDiplom.DAL.Interfaces
         IRepository<Equipment> Equipments { get; }
         IRepository<Indication> Indications { get; }
         IRepository<Organization> Organizations { get; }
+
+        ApplicationUserManager UserManager { get; }
+        IClientManager ClientManager { get; }
+        ApplicationRoleManager RoleManager { get; }
+
 
         Task SaveAsync();
         void Save();

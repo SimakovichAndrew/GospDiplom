@@ -1,5 +1,5 @@
-﻿using ForumMVC.BLL.DTO;
-using ForumMVC.BLL.Infrastructure;
+﻿using GospDiplom.BLL.DTO;
+using GospDiplom.BLL.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ForumMVC.BLL.Interfaces
+namespace GospDiplom.BLL.Interfaces
 {
     public interface IUserService : IDisposable
     {

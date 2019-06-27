@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using GospDiplom.DAL.Entities;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 //using System.ComponentModel.DataAnnotations;
 //using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ForumMVC.Domain.Entities
+namespace GospDiplom.DAL.Entities
 {
    public class ClientProfile
     {
@@ -17,7 +18,7 @@ namespace ForumMVC.Domain.Entities
         
         //Свойство навигации для внешнего ключа
 
-       public virtual ICollection<Topic> Topics { get; set; }
+     //public virtual ICollection<Kiosk> Kiosks { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

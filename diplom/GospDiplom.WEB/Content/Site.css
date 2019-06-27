@@ -1,8 +1,7 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿
+html {
+    font-size: 1rem;
 }
-
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -21,4 +20,66 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+/* <!-- ****************************** -->*/
+BODY {
+    font-family: Cambria, Georgia, "Times New Roman";
+    font-size:xx-large;
+    margin: 0;
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+DIV#header DIV.title, DIV.item H3, DIV.item H4, DIV.pager A {
+    font: bold 1em "Arial Narrow", "Franklin Gothic Medium", Arial;
+}
+
+
+DIV#content {
+    border-left: 2px solid gray;
+    margin-left: 9em;
+    padding: 1em;
+    }
+
+DIV#categories {
+    float: left;
+    width: 8em;
+    padding: .3em;
+}
+
+.bg li a {
+    color: white;
+}
+
+ul {
+    border: solid black 1px;
+}
+
+.bg {
+    background-image: url('../Content/fon.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    color: white;
+}
+
+.navbar-brand {
+    color: azure;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.col-md-4 last bg-success {
+    padding-bottom: inherit;
+}
+
+hr {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border: 2;
+    border-top: 2px solid #19a3d0;
+}
+
+table {
+    font-size: 1.5rem;
 }

@@ -1,5 +1,4 @@
-﻿using GospDiplom.BLL.DTO;
-using System;
+﻿using System;
 
 namespace GospDiplom.WEB.Models
 {

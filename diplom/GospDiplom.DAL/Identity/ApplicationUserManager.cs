@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
-using ForumMVC.Domain.Entities;
+using GospDiplom.DAL.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,9 +7,9 @@ using System.Web;
 using Microsoft.AspNet.Identity.EntityFramework;
 //using Microsoft.AspNet.Identity.Owin;
 //using ForumMVC.Domain.Concrete;
-using ForumMVC.Domain.Repositories;
+using GospDiplom.DAL.Repositories;
 
-namespace ForumMVC.Domain.Identity
+namespace GospDiplom.DAL.Identity
 {
     //Данный класс будет управлять пользователями: добавлять их в базу данных и аутентифицировать.
     public class ApplicationUserManager : UserManager<ApplicationUser>

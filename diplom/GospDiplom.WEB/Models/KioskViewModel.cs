@@ -1,8 +1,4 @@
-﻿using GospDiplom.BLL.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System;
 
 namespace GospDiplom.WEB.Models
 {
@@ -24,10 +20,10 @@ namespace GospDiplom.WEB.Models
 
         // public int TexUchetId { get; set; }
         // public Nullable<DateTime> Arenda { get; set; }
-      //  public OrganizationViewModel Organization { get; set; }
+        //  public OrganizationViewModel Organization { get; set; }
         public int OrganizationId { get; set; }
         //public KioskDTO Kiosk { get; set; }
-       // public ICollection<EquipmentDTO> Equipments { get; set; }
+        // public ICollection<EquipmentDTO> Equipments { get; set; }
         //public ICollection<BLL.DTO.SchetchikDTO> Schetchiks { get; set; }
     }
 }

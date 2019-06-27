@@ -15,14 +15,15 @@ namespace GospDiplom.WEB.Controllers
 {
     public class HomeController : Controller
     {
-        IProcedureService orderService;
-
         //public HomeController()
         //{
         //    Mapper.Initialize(cfg => cfg.CreateMap<KioskDTO, KioskViewModel>());
         //}
 
         public int PageCom = 25;
+
+        IProcedureService orderService;
+
 
         public HomeController(IProcedureService serv)
         {

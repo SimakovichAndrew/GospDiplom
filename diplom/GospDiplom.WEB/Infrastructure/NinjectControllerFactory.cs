@@ -1,20 +1,17 @@
 ﻿using Ninject;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace GospDiplom.WEB.Infrastructure
 {
     //Реализация пользовательской фабрики контроллеров,
-        //наследуясь от фабрики используемой по умолчанию
+    //наследуясь от фабрики используемой по умолчанию
 
-    public class NinjectControllerFactory: DefaultControllerFactory
+    public class NinjectControllerFactory : DefaultControllerFactory
     {
         private IKernel ninjectKernel;
-        
+
         public NinjectControllerFactory()
         {
             //создание контроллера

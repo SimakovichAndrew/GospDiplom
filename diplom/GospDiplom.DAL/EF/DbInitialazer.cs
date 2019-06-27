@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data.Entity;
 using GospDiplom.DAL.Entities;
-
+using GospDiplom.DAL.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity;
 
 namespace GospDiplom.DAL.EF
 {
@@ -12,7 +14,68 @@ namespace GospDiplom.DAL.EF
         protected override void Seed(GospContext db)
         {
             // base.Seed(db);
+            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
 
+            var roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(db));
+            // создаем  роли  lkz 
+            var role1 = new ApplicationRole { Name = "admin" };
+            var role2 = new ApplicationRole { Name = "moderator" };
+            var role3 = new ApplicationRole { Name = "user" };
+            // добавляем роли в бд
+            roleManager.Create(role1);
+            roleManager.Create(role2);
+            roleManager.Create(role3);
+            // создаем администратора
+            var admin = new ApplicationUser
+            {
+                Email = "admin@mail.ru",
+                UserName = "Boss"
+            };
+            string password = "123456";
+            var result = userManager.Create(admin, password);
+            if (result.Succeeded)
+            {
+                // добавляем для пользователя роль
+                userManager.AddToRole(admin.Id, role1.Name);
+                userManager.AddToRole(admin.Id, role2.Name);
+                userManager.AddToRole(admin.Id, role3.Name);
+            }
+            // создаем модератора
+            var moderator = new ApplicationUser
+            {
+                Email = "mmm@mail.ru",
+                UserName = "Moderator"
+            };
+            password = "654321";
+            result = userManager.Create(moderator, password);
+
+            // если создание пользователя прошло успешно
+            if (result.Succeeded)
+            {
+                // добавляем для пользователя роль
+                userManager.AddToRole(moderator.Id, role2.Name);
+                userManager.AddToRole(moderator.Id, role3.Name);
+            }
+            //создаем простого пользователя васю
+            var user = new ApplicationUser
+            {
+                Email = "vvv@mail.ru",
+                UserName = "Vasja"
+            };
+            password = "111111";
+            result = userManager.Create(user, password);
+
+            // если создание пользователя прошло успешно
+            if (result.Succeeded)
+            {
+                // добавляем для пользователя роль
+                userManager.AddToRole(user.Id, role3.Name);
+
+            }
+
+            db.SaveChanges();
+
+            //___________________________________________________________________________________________________________________________________
             db.Organizations.AddRange(new List<Organization>
             {
                 new Organization{OrgName="Энергосбыт", Dogovor= 285, Telefon=0, Email= "energo-gomel@osp.by"},
@@ -42,8 +105,6 @@ namespace GospDiplom.DAL.EF
                 new Organization{OrgName="КЖРЭУП", Dogovor= 5857, Telefon=0, Email= "energo-gomel@osp.by"}
             });
 
-            
-
             db.SaveChanges();
 
             db.Kiosks.AddRange(new List<Kiosk>
@@ -66,13 +127,11 @@ namespace GospDiplom.DAL.EF
                 }
             });
 
-
             for (int i = 5; i < 210; i++)
             {
                 db.Kiosks.Add(new Kiosk { Nomer = i.ToString(), Arenda = new DateTime(2019, 9, 16), ModelKioska = "Киоск", OrganizationId = 1, Town = Towns.Гомель });
 
             }
-
 
             db.SaveChanges();
 

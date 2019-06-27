@@ -1,7 +1,7 @@
-﻿using ForumMVC.BLL.DTO;
-using ForumMVC.BLL.Infrastructure;
-using ForumMVC.BLL.Interfaces;
-using ForumMVC.Web.Models;
+﻿using GospDiplom.BLL.DTO;
+using GospDiplom.BLL.Infrastructure;
+using GospDiplom.BLL.Interfaces;
+using GospDiplom.WEB.Models;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System;
@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ForumMVC.Web.Controllers
+namespace GospDiplom.Web.Controllers
 {
     public class AccountController : Controller
     {
@@ -51,7 +51,7 @@ namespace ForumMVC.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                UserDTO userDto = new UserDTO { Email = model.Name, Password = model.Password };
+                UserDTO userDto = new UserDTO { /*Name*/Email = model.Email, Password = model.Password };
                 ClaimsIdentity claim = await UserService.Authenticate(userDto);
                 if (claim == null)
                 {
@@ -88,9 +88,10 @@ namespace ForumMVC.Web.Controllers
            // await SetInitialDataAsync();
           
             if (ModelState.IsValid)
-            {
+            { 
                 UserDTO userDto = new UserDTO
                 {
+                    UserName = model.UserName,
                     Email = model.Email,
                     Password = model.Password,
                     Address = model.Address,
@@ -101,6 +102,7 @@ namespace ForumMVC.Web.Controllers
                 if (operationDetails.Succedeed)
                     return View("SuccessRegister");
                 else
+
                     ModelState.AddModelError(operationDetails.Property, operationDetails.Message);
             }
             return View(model);
@@ -111,9 +113,9 @@ namespace ForumMVC.Web.Controllers
             await UserService.SetInitialData(new UserDTO
             {
                 Email = "email@mail.ru",
-                UserName = "Vasya",
+                UserName = "Семен Семенович Горбунков",
                 Password = "123456",
-                Name = "Семен Семенович Горбунков",
+                Name = "Kozel",
                 Address = "ул. Спортивная, д.30, кв.75",
                 Role = "admin",
             }, new List<string> { "user", "admin" });

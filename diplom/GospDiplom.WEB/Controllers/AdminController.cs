@@ -1,11 +1,11 @@
-﻿using ForumMVC.BLL.Service;
+﻿using GospDiplom.BLL.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ForumMVC.Web.Controllers
+namespace GospDiplom.Web.Controllers
 {
     [Authorize(Roles ="admin")]
     public class AdminController : Controller

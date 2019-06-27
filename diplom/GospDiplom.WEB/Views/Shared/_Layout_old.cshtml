@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title – приложение ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("База киосков ГомельОблСоюзПечать", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
+                    <li>@Html.ActionLink("О программе", "About", "Home")</li>
+                    <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    @*<form>
+            <div class="nativeDatePicker">
+                <label for="month-visit">What month would you like to visit us?</label>
+                <input type="month" id="month-visit" name="month-visit">
+                <span class="validity"></span>
+            </div>
+            <p class="fallbackLabel">What month would you like to visit us?</p>
+            <div class="fallbackDatePicker">
+                <div>
+                    <span>
+                        <label for="month">Month:</label>
+                        <select id="month" name="month">
+                            <option selected>January</option>
+                            <option>February</option>
+                            <option>March</option>
+                            <option>April</option>
+                            <option>May</option>
+                            <option>June</option>
+                            <option>July</option>
+                            <option>August</option>
+                            <option>September</option>
+                            <option>October</option>
+                            <option>November</option>
+                            <option>December</option>
+                        </select>
+                    </span>
+                    <span>
+                        <label for="year">Year:</label>
+                        <select id="year" name="year"></select>
+                    </span>
+                </div>
+            </div>
+        </form>*@
+
+
+
+
+    @using (Html.BeginForm("Login", "Account", FormMethod.Get))
+    {
+        @Html.AntiForgeryToken()
+
+        @*<input type="hidden" value="@ViewBag.BookId" name="BookId" />*@
+        <table>
+            @*<tr>
+                    <td><p>Введите Login </p></td>
+                    <td><input type="text" name="Login" /> </td>
+                </tr>
+                <tr>
+                    <td><p>Введите пароль :</p></td>
+                    <td><input type="text" name="Password" /> </td>
+                </tr>*@
+            <tr>
+                <td><input type="submit" value="Войти" /> </td>
+                <td></td>
+            </tr>
+        </table>
+    }
+
+
+
+    @using (Html.BeginForm("IndicationTemp", "SchetchikInput", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Введите номер киоска и месяц показаний</span>
+            </div>
+            @*<input type="hidden" value="@ViewBag.BookId" name="BookId" />*@
+            <input type="text" name="Nomer" value="0" aria-label="номер киоска" class="form-control" />
+
+            @Html.DropDownList("Month", new SelectList(new string[] { "", "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" }))
+            <table>
+                @* <tr>
+                        <td><p>Введите свое имя </p></td>
+                        <td><input type="text" name="Person" /> </td>
+                    </tr>
+                    <tr>
+                        <td><p>Введите адрес :</p></td>
+                        <td><input type="text" name="Address" /> </td>
+                    </tr>*@
+                <tr>
+                    <td>
+                        <div>
+                            <!-- Default inline 1-->
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" checked class="custom-control-input" value="1" id="defaultInline1" name="checkSort">
+                                <label class="custom-control-label" for="defaultInline1">по номеру киоска</label>
+                            </div>
+
+                            <!-- Default inline 2-->
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" value="2" id="defaultInline2" name="checkSort">
+                                <label class="custom-control-label" for="defaultInline2">по месяцу</label>
+                            </div>
+
+                            <!-- Default inline 3-->
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" value="3" id="defaultInline3" name="checkSort">
+                                <label class="custom-control-label" for="defaultInline3">по потреблению</label>
+                            </div>
+                        </div>
+
+                        <button type="submit" value="показать" class="btn btn-primary" @*data-toggle="button"*@ aria-pressed="false" autocomplete="off">
+                            показать
+                        </button>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    }
+
+
+
+
+
+
+    <hr />
+    @*@using (Html.BeginForm("IndicationTemp", "SchetchikInput", FormMethod.Post))*@
+    @using (Html.BeginForm("Register", "Account", FormMethod.Get))
+    {
+        @Html.AntiForgeryToken()
+
+        <button type="submit" value="регистр" class="btn btn-primary" @*data-toggle="button"*@ aria-pressed="false" autocomplete="off">
+            Регистрация
+        </button>
+
+    }
+
+
+    <div class="container body-content">
+        <hr />
+        @RenderBody()
+        <hr />
+    </div>
+    <footer>
+        <p>&copy; @DateTime.Now.Year – разработка Симакович</p>
+        @*<p>@Html.ActionLink("Ввод показаний", "Index", "SchetchikInput")</p>*@
+    </footer>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Html.ActionLink("Домашняя страница", "Index", "Home")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
