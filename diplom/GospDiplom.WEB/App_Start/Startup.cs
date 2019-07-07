@@ -26,7 +26,7 @@ namespace GospDiplom.WEB.App_Start
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Account/Login"),/*Name*/
+                LoginPath = new PathString("/Account/Login"),/*LastName*/
             });
         }
 

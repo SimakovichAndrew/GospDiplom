@@ -28,7 +28,11 @@ namespace GospDiplom.DAL.Repositories
             throw new NotImplementedException();
         }
 
-
+        public ClientProfile FindId(int? id)
+        {
+           return Database.ClientProfiles.Find(id);
+            throw new NotImplementedException();
+        }
 
         public void Dispose()
         {

@@ -9,6 +9,8 @@ namespace GospDiplom.WEB.Models
     {
         //  [Required]
         public string Email/*UserName*/ { get; set; }
+        //  [Required]
+        public string UserName { get; set; }
         // [Required]
         //  [DataType(DataType.Password)]
         public string Password { get; set; }

@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "LoginModel";
+    //Layout = null;
+    Layout = "~/Views/Shared/Login.cshtml";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Raw("Номер киоска - ") @ViewBag.UserAdress
+<h2>@ViewBag.Greeting   @ViewBag.UserName</h2>
+<h3> Введите показания </h3>
+
+@using (Html.BeginForm("Create", "IndicationInput", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    if (User.IsInRole("admin"))
+    {
+        @Html.Label("Номер киоска")
+        @Html.Editor("text")
+    }
+    @Html.Label("Первый счетчик") @ViewBag.Error
+    <input type="number" name="tarif1" />
+    @Html.Label("Второй счетчик") @ViewBag.Error
+    <input type="number" name="tarif2" />
+    @*@Html.Editor("number", "tarif")*@
+    <button type="submit" name="button" value="Отправить" class="btn btn-primary mb-2" @*data-toggle="button"*@ aria-pressed="false" autocomplete="off">
+        Отправить
+    </button>
+}

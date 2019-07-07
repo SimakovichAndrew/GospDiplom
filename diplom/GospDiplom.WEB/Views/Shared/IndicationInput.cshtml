@@ -1,0 +1,8 @@
+﻿@if (User.IsInRole("user"))
+{
+    @Html.ActionLink("Ввод показаний", "Index", "IndicationInput");
+        }
+else{ 
+<h2> Ввод показаний</h2>
+}
+

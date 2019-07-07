@@ -25,7 +25,6 @@ textarea {
 /* <!-- ****************************** -->*/
 BODY {
     font-family: Cambria, Georgia, "Times New Roman";
-    font-size:xx-large;
     margin: 0;
     padding-top: 50px;
     padding-bottom: 20px;
@@ -40,20 +39,34 @@ DIV#content {
     border-left: 2px solid gray;
     margin-left: 9em;
     padding: 1em;
-    }
+}
 
-DIV#categories {
+DIV#categories A {
     float: left;
     width: 8em;
     padding: .3em;
 }
+
+    div#categories a.selected {
+        background-color: #19a3d0;
+        color: white;
+    }
+
+    div#categories a:hover {
+        background-color: #CCC;
+    }
+
+    div#categories a.selected:hover {
+        background-color: #19a3d0
+    }
+
 
 .bg li a {
     color: white;
 }
 
 ul {
-    border: solid black 1px;
+    /*border: solid black 1px;*/
 }
 
 .bg {
@@ -81,5 +94,11 @@ hr {
 }
 
 table {
-    font-size: 1.5rem;
+    font-size: medium;
 }
+
+thead {
+    background-color: cornflowerblue;
+}
+
+

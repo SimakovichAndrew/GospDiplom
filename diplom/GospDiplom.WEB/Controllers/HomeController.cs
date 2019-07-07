@@ -33,6 +33,7 @@ namespace GospDiplom.WEB.Controllers
 
 
         [HttpGet]
+        //[Authorize (Roles ="admin")]
         public ActionResult Index(int page = 1)
         {
             //List<InputViewModels> listInput = new List<InputViewModels>();
@@ -52,7 +53,11 @@ namespace GospDiplom.WEB.Controllers
             //    });
             //    i++;
             //}
+            if(!User.IsInRole("admin")&&!User.IsInRole("moderator")&&!User.IsInRole("user"))
+            {
 
+              return RedirectToAction ("IndexIndication","IndicationInput");
+            }
            IEnumerable<AllTable> tableKioski = orderService.GetAllKioski();
             ViewBag.totalInfo = tableKioski;
             InputViewModels listInput = new InputViewModels
@@ -70,11 +75,11 @@ namespace GospDiplom.WEB.Controllers
             };
 
 
-        //ChatListViewModel model = new ChatListViewModel
+        //TownListViewModel model = new TownListViewModel
         //{
-        //    TopicId = SelectTopicId,
-        //    GetComments = repository.GetComments()
-        //       .Where(p => topicname == null || p.ComTopicId == SelectTopicId)
+        //    KioskId = SelectTownId,
+        //    GetSchetchiks = repository.GetSchetchiks()
+        //       .Where(p => topicname == null || p.ComTopicId == SelectTownId)
         //       .OrderBy(p => p.CommentId)
         //       .Skip((page - 1) * PageCom)
         //       .Take(PageCom),
@@ -83,11 +88,11 @@ namespace GospDiplom.WEB.Controllers
         //        CurrentPage = page,
         //        ItemsPerPage = PageCom,
         //        TotalItems = topicname == null ?
-        //        repository.GetComments().Count() :
-        //        repository.GetComments().Where(e => e.ComTopicName == topicname).Count()
+        //        repository.GetSchetchiks().Count() :
+        //        repository.GetSchetchiks().Where(e => e.ComTopicName == topicname).Count()
         //    },
-        //    CurrentTopicName = topicname,
-        //    Autor = User.Identity.Name
+        //    CurrentTownName = topicname,
+        //    Autor = User.Identity.LastName
         //};
 
   return View(listInput);

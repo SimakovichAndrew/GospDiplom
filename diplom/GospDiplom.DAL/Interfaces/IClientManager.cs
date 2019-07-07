@@ -13,5 +13,6 @@ namespace GospDiplom.DAL.Interfaces
     {
         void Create(ClientProfile item);
         ClientProfile Find(/*int? id*/string name);
+        ClientProfile FindId(int? id);
     }
 }

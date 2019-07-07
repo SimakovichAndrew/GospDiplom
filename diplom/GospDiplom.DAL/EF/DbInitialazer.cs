@@ -21,10 +21,12 @@ namespace GospDiplom.DAL.EF
             var role1 = new ApplicationRole { Name = "admin" };
             var role2 = new ApplicationRole { Name = "moderator" };
             var role3 = new ApplicationRole { Name = "user" };
+            var role4 = new ApplicationRole { Name = "kiosk" };
             // добавляем роли в бд
             roleManager.Create(role1);
             roleManager.Create(role2);
             roleManager.Create(role3);
+            roleManager.Create(role4);
             // создаем администратора
             var admin = new ApplicationUser
             {
@@ -78,31 +80,31 @@ namespace GospDiplom.DAL.EF
             //___________________________________________________________________________________________________________________________________
             db.Organizations.AddRange(new List<Organization>
             {
-                new Organization{OrgName="Энергосбыт", Dogovor= 285, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Энергосбыт", Dogovor= 2851, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Энергосбыт", Dogovor= 2852, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Энергосбыт", Dogovor= 2853, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Энергосбыт", Dogovor= 281, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Энергосбыт", Dogovor= 125, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Энергосбыт", Dogovor= 72, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Энергосбыт", Dogovor= 3060, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Энергосбыт", Dogovor= 109, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Энергосбыт", Dogovor= 1030, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Энергосбыт", Dogovor= 469, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Энергосбыт", Dogovor= 755, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Энергосбыт", Dogovor= 794, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Энергосбыт", Dogovor= 2016, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Энергосбыт", Dogovor= 535231, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Энергосбыт", Dogovor= 535233, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Энергосбыт", Dogovor= 535234, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Энергосбыт", Dogovor= 535235, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Энергосбыт", Dogovor= 535236, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Энергосбыт", Dogovor= 535237, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Энергосбыт", Dogovor= 535238, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Дистанция Жлобин", Dogovor= 5857, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="Дистанция Гомель", Dogovor= 5857, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="БелГУТ", Dogovor= 5857, Telefon=0, Email= "energo-gomel@osp.by"},
-                new Organization{OrgName="КЖРЭУП", Dogovor= 5857, Telefon=0, Email= "energo-gomel@osp.by"}
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 285, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 2851, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 2852, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 2853, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 281, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 125, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 72, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 3060, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 109, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 1030, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 469, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 755, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 794, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 2016, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 535231, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 535233, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 535234, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 535235, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 535236, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 535237, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Энергосбыт, Dogovor= 535238, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Дистанция_Жлобин, Dogovor= 5857, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.Дистанция_Гомель, Dogovor= 5857, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.БелГУТ, Dogovor= 5857, Telefon=0, Email= "energo-gomel@osp.by"},
+                new Organization{OrgName=OrgNames.КЖРЭУП, Dogovor= 5857, Telefon=0, Email= "energo-gomel@osp.by"}
             });
 
             db.SaveChanges();
@@ -181,7 +183,7 @@ namespace GospDiplom.DAL.EF
 
             db.Indications.AddRange(new List<Indication>
             {
-                new Indication{Tarif1=0.5, Tarif2=2.5, Month=new DateTime(2019, 7, 16), SchetchikId=1 },
+                new Indication{Tarif1=10.0, Tarif2=2.5, Month=new DateTime(2019, 4, 16), SchetchikId=1 },
                 new Indication{Tarif1=1.5, Tarif2=3.5, Month=new DateTime(2019, 3, 16), SchetchikId=2 },
                 new Indication{Tarif1=4.5, Tarif2=5.5, Month=new DateTime(2019, 1, 16), SchetchikId=3 },
                 new Indication{Tarif1=6.5, Tarif2=7.5, Month=new DateTime(2019, 2, 16), SchetchikId=4 },
@@ -189,7 +191,7 @@ namespace GospDiplom.DAL.EF
                 new Indication{Tarif1=10.5, Tarif2=12.5, Month=new DateTime(2019, 9, 16), SchetchikId=6 },
                 new Indication{Tarif1=14.5, Tarif2=15.5, Month=new DateTime(2019, 10, 16), SchetchikId=7 },
                 new Indication{Tarif1=1.0, Tarif2=3.0, Month=new DateTime(2019, 1, 16), SchetchikId=1 },
-                new Indication{Tarif1=4.0, Tarif2=5.0, Month=new DateTime(2019, 4, 16), SchetchikId=1 },
+                new Indication{Tarif1=4.0, Tarif2=5.0, Month=new DateTime(2019, 2, 16), SchetchikId=1 },
                 new Indication{Tarif1=6.0, Tarif2=7.0, Month=new DateTime(2019, 3, 16), SchetchikId=1 },
             });
 

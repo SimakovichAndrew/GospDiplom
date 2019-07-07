@@ -16,16 +16,17 @@ namespace GospDiplom.WEB.Controllers
         {
             recordService = repo;
         }
-        public PartialViewResult Menu(/*string topicname = null*/)
+        
+        public PartialViewResult Menu(string town = null)
         {
-
-            IEnumerable<string> topic = recordService.GetKiosks()
+            ViewBag.SelectTown= town;
+            IEnumerable<string> towns = recordService.GetKiosks()
              .Select(x => x.Town)
              .Distinct()
              .OrderBy(x => x);
 
 
-            return PartialView(topic);
+            return PartialView(towns);
         }
 
     }

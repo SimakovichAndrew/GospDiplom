@@ -49,9 +49,9 @@ namespace GospDiplom.DAL.Repositories
             //throw new NotImplementedException();
         }
 
-        public Organization GetString(string nomer)
+        public Organization GetString(string name)
         {
-            return db.Organizations.Where(x => x.OrgName == nomer).First();
+            return db.Organizations.Where(x => x.OrgName.ToString() == name).First();
             //throw new NotImplementedException();
         }
 

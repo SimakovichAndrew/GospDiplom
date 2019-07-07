@@ -15,6 +15,7 @@ namespace GospDiplom.WEB.Models
         public string Town { get; set; }
         public string Adress { get; set; }
         public double Area { get; set; }
+        public string OrgName { get; set; }
 
 
 

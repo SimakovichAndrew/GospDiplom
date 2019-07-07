@@ -17,7 +17,7 @@ namespace GospDiplom.WEB.Models
             switch (key)
             {
                 case "2": return AllCounters.OrderBy(y => y.Date.DayOfYear).ToList(); 
-                case "3": return AllCounters.OrderBy(y => (y.Tarif2 - y.Tarif1)).ToList();
+                case "3": return AllCounters.OrderBy(y => (y.Tarif1End - y.Tarif1Start)).ToList();
                 default: return  AllCounters.OrderBy(y => y.NomerKioska).ToList();
             }
         }

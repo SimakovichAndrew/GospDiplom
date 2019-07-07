@@ -186,16 +186,22 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ClaimsController.cs" />
     <Compile Include="Controllers\EconomicController.cs" />
+    <Compile Include="Controllers\EditKioskController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IndicationInputController.cs" />
     <Compile Include="Controllers\NavController.cs" />
     <Compile Include="Controllers\SchetchikInputController.cs" />
+    <Compile Include="Controllers\TownController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="HtmlHelpers\IdentityHelpers.cs" />
     <Compile Include="HtmlHelpers\PaigingHelpers.cs" />
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
+    <Compile Include="Models\EditKioskModels.cs" />
     <Compile Include="Models\IndicationViewModel.cs" />
     <Compile Include="Models\InputViewModels.cs" />
     <Compile Include="Models\KioskViewModel.cs" />
@@ -205,6 +211,7 @@
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\SchetchikViewModel.cs" />
+    <Compile Include="Models\TownListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\OrderModule.cs" />
   </ItemGroup>
@@ -292,6 +299,16 @@
     <Content Include="Views\Account\SuccessRegister.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Nav\Menu.cshtml" />
+    <Content Include="Views\EditKiosk\Index.cshtml" />
+    <Content Include="Views\EditKiosk\EditKiosk.cshtml" />
+    <Content Include="Views\SchetchikInput\IndicationOneKioskAllMonth.cshtml" />
+    <Content Include="Views\Town\Town.cshtml" />
+    <Content Include="Views\IndicationInput\IndexIndication.cshtml" />
+    <Content Include="Views\Shared\IndicationInput.cshtml" />
+    <Content Include="Views\Shared\Login.cshtml" />
+    <Content Include="Views\Claims\Index.cshtml" />
+    <Content Include="Views\Admin\EditRole.cshtml" />
+    <Content Include="Views\IndicationInput\_IndicationNew.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

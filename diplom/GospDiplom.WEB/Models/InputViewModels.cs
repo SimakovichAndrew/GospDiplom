@@ -28,8 +28,8 @@ namespace GospDiplom.WEB.Models
 
 
         //public DateTime Month { get; set; }
-        //public double Tarif1 { get; set; }
-        //public double Tarif2 { get; set; }
+        //public double Tarif1Start { get; set; }
+        //public double Tarif1End { get; set; }
         //public string Kiosk { get; set; }
         //public int Counter { get; set; }
 

@@ -113,7 +113,8 @@ namespace GospDiplom.DAL.Repositories
 
         public void Save()
         {
-            throw new NotImplementedException();
+            db.SaveChanges();
+            //throw new NotImplementedException();
         }
 
 

@@ -13,7 +13,7 @@ namespace GospDiplom.DAL.Entities
     {
 
         public virtual ClientProfile ClientProfile { get; set; }
-        //public ApplicationUserManager (IUserStore<IdentityUser> store)
+        //public ApplicationUserManager(IUserStore<IdentityUser> store)
         //    : base(store)
         //{
         //}

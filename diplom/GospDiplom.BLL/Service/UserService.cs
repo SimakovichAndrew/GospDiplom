@@ -26,7 +26,7 @@ namespace GospDiplom.BLL.Service
 
         public async Task<OperationDetails> CreateUser(UserDTO userDto)
         {
-            ApplicationUser user = await Database.UserManager.FindByEmailAsync(userDto.Email);
+            ApplicationUser user = await Database.UserManager.FindByNameAsync(userDto.UserName);
             if (user == null)
             {
                 user = new ApplicationUser { PasswordHash = userDto.Password, UserName = userDto.UserName, Email=userDto.Email };
@@ -36,7 +36,7 @@ namespace GospDiplom.BLL.Service
                 // добавляем роль
                 await Database.UserManager.AddToRoleAsync(user.Id, userDto.Role);
                 // создаем профиль клиента
-                ClientProfile clientProfile = new ClientProfile { Id = user.Id, Address = userDto.Address, Name = userDto.Name };
+                ClientProfile clientProfile = new ClientProfile { Id = user.Id, Address = userDto.Address, LastName = userDto.LastName };
                 Database.ClientManager.Create(clientProfile);
                 await Database.SaveAsync();
                 return new OperationDetails(true, "Регистрация успешно пройдена", "");
@@ -48,10 +48,40 @@ namespace GospDiplom.BLL.Service
             }
         }
 
-        public UserDTO userDTO()
+        public async Task<OperationDetails> EditRole(string name, string role,bool z)
         {
-            var com = Database.ClientManager.Find("Boss");
-            return new UserDTO { Id = com.Id, Name = com.Name, UserName = com.ApplicationUser.UserName, Password = com.ApplicationUser.PasswordHash };
+            ApplicationUser user = await Database.UserManager.FindByNameAsync(name);
+            if (user != null)
+            {
+                if (z)
+                {
+                    await Database.UserManager.AddToRoleAsync(user.Id, role);
+                   
+                }
+                else
+                {
+                    await Database.UserManager.RemoveFromRoleAsync(user.Id, role);
+                }
+
+                await Database.SaveAsync();
+                return new OperationDetails(true, "Изменения сохранены", "");
+            }
+
+            else
+            {
+                return new OperationDetails(false, "Пользователь с таким именем уже существует", "LastName");
+            }
+           
+        }
+
+
+
+
+
+        public UserDTO userDTO(int id)
+        {
+            var com = Database.ClientManager.FindId(id);
+            return new UserDTO { Id = com.Id, LastName = com.LastName, UserName = com.ApplicationUser.UserName, Password = com.ApplicationUser.PasswordHash, Address=com.Address, Role = com.ApplicationUser.Roles.First().ToString()};
             throw new NotImplementedException();
         }
 
@@ -60,7 +90,7 @@ namespace GospDiplom.BLL.Service
         {
             ClaimsIdentity claim = null;
             // находим пользователя
-            ApplicationUser user = await Database.UserManager.FindByEmailAsync("admin@mail.ru"/*userDto.EmailuserDto.UserName, userDto.Password*/);
+            ApplicationUser user = await Database.UserManager.FindAsync(userDto.UserName, userDto.Password);
             // авторизуем его и возвращаем объект ClaimsIdentity
             if (user != null)
                 claim = await Database.UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
@@ -93,11 +123,11 @@ namespace GospDiplom.BLL.Service
         {
             if (/*id*/name==null)
                 throw new System.ComponentModel.DataAnnotations.ValidationException("Имя не набрано"/*, ""*/);
-            var com = Database.ClientManager.Find(name);
+            var com = Database.UserManager.FindByName(name);
             if (com == null)
                 throw new System.ComponentModel.DataAnnotations.ValidationException("Имя не найдено"/*, ""*/);
 
-            return new  UserDTO { Id = com.Id, Name = com.Name, UserName = com.ApplicationUser.UserName, Password = com.ApplicationUser.PasswordHash};
+            return new  UserDTO { Id = com.Id, LastName = com.ClientProfile.LastName, UserName = com.UserName, Password = com.PasswordHash, Role=com.Roles.FirstOrDefault().ToString(), Address=com.ClientProfile.Address};
             throw new NotImplementedException();
         }
     }

@@ -11,6 +11,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace GospDiplom.Web.Controllers
 {
@@ -47,11 +48,11 @@ namespace GospDiplom.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginModel model)
         {
-           
+
 
             if (ModelState.IsValid)
             {
-                UserDTO userDto = new UserDTO { /*Name*/Email = model.Email, Password = model.Password };
+                UserDTO userDto = new UserDTO { /*LastName*/UserName = model.UserName, Password = model.Password };
                 ClaimsIdentity claim = await UserService.Authenticate(userDto);
                 if (claim == null)
                 {
@@ -76,6 +77,12 @@ namespace GospDiplom.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult LogoutUser()
+        {
+            AuthenticationManager.SignOut();
+            return RedirectToAction("Login", "Account");
+        }
+
         public ActionResult Register()
         {
             return View();
@@ -85,18 +92,18 @@ namespace GospDiplom.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterModel model)
         {
-           // await SetInitialDataAsync();
-          
+            // await SetInitialDataAsync();
+
             if (ModelState.IsValid)
-            { 
+            {
                 UserDTO userDto = new UserDTO
                 {
                     UserName = model.UserName,
                     Email = model.Email,
                     Password = model.Password,
                     Address = model.Address,
-                    Name = model.Name,
-                    Role = "user"
+                    LastName = model.Name,
+                    Role = "kiosk"
                 };
                 OperationDetails operationDetails = await UserService.CreateUser(userDto);
                 if (operationDetails.Succedeed)
@@ -115,7 +122,7 @@ namespace GospDiplom.Web.Controllers
                 Email = "email@mail.ru",
                 UserName = "Семен Семенович Горбунков",
                 Password = "123456",
-                Name = "Kozel",
+                LastName = "Kozel",
                 Address = "ул. Спортивная, д.30, кв.75",
                 Role = "admin",
             }, new List<string> { "user", "admin" });

@@ -1,0 +1,9 @@
+﻿@{
+    ViewBag.Title = "Новые показания";
+    //Layout = null;
+    Layout = "~/Views/Shared/Login.cshtml";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2> Новые показания  = @ViewBag.Tarif</h2>
+@Html.ActionLink("Ввести снова","IndexIndication", "IndicationInput")

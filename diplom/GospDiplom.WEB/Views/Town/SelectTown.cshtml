@@ -1,22 +1,18 @@
-﻿@model GospDiplom.WEB.Models.InputViewModels
+﻿@using GospDiplom.BLL.DTO
+@model IEnumerable<AllTable>
 
 @{
-    ViewBag.Title = "Таблица торговых объектов Гомельского филиала РУП \" Белсоюзпечать\"";
-}
+    ViewBag.Title = @Model.First().Gorod;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 
-<h2>Таблица торговых объектов<br /> Гомельского филиала РУП "Белсоюзпечать"</h2>
+<h2>Таблица торговых объектов г.@Model.First().Gorod</h2>
 <div class="table-responsive-sm">
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th scope="col">
+                <th scope="col">   
                     Номер
-                </th>
-                <th scope="col">
-                    Тип объекта
-                </th>
-                <th scope="col">
-                    Город
                 </th>
                 <th scope="col">
                     Адрес
@@ -33,7 +29,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.AllKioski)
+            @foreach (var item in Model)
             {
                 <tr>
 
@@ -42,12 +38,6 @@
 
                         @Html.DisplayFor(modelItem => item.Nomer)
                     </th>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ModelCounter)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Gorod)
-                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Adress)
                     </td>
@@ -61,7 +51,7 @@
                         @Html.DisplayFor(modelItem => item.Arenda)
                     </td>
 
-                    @if (User.IsInRole("admin")|| User.IsInRole("moderator"))
+                    @if (User.IsInRole("admin"))
                     {
                         <td>
                             @Html.ActionLink("Редактировать", "EditKiosk", "EditKiosk", new { nomer = item.Nomer }, null)
@@ -71,7 +61,7 @@
         </tbody>
     </table>
 </div>
-        <div class="pager">
-            @Html.PageLinks(Model.PagingInfoCom, x => Url.Action("Index", new { page = x}))
-                @*@Html.PageLinks(Model.First().PagingInfoCom, x => Url.Action("Chat", new { page = x, category = Model.CurrentTopicName }))*@
-         </div>
+<div class="pager">
+    @Html.PageLinks(Model.PagingInfoCom, x => Url.Action("Town", new { page = x }))
+    @*@Html.PageLinks(Model.First().PagingInfoCom, x => Url.Action("Chat", new { page = x, category = Model.CurrentTopicName }))*@
+</div>

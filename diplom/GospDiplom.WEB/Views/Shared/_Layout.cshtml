@@ -4,12 +4,12 @@
 }
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>База киосков Гомельского филиала "Белсоюзпечать"</title>
+    <title>База торговых объектов Гомельского филиала "Белсоюзпечать"</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -34,88 +34,100 @@
 <body>
     <!-- Open the output in a new blank tab (Click the arrow next to "Show Output" button) and resize the browser window to understand how the Bootstrap responsive grid system works. -->
     <div class="container-fluid">
-        <!--Row with three equal columns-->
-        <div class="row justify-content-between">
-            <div class="col-md-4 col-lg-3">
-                @*<div class="demo-content">.col-sm-4</div>*@
-                <div class="navbar navbar-inverse navbar-fixed-top">
-                    <div class="container">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            @Html.ActionLink("Начальная", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <nav class="navbar navbar-expand-sm bg-primary">
+            @Html.ActionLink("Начальная", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <span class="navbar-text navbar-expand-sm h2">База данных торговых объектов Гомельского филиала РУП "Белсоюзпечать"</span>
+            <ul class="list-group">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="navbar-item"><a class="navbar-brand">@*Html.ViewBag.Greeting*@  @User.Identity.Name</a></li>
+                    <li class="nav-item">@Html.ActionLink("Выход", "LogoutUser", "Account", new { area = "" }, new { @class = "navbar-brand" })</li>
+                }
+                @if (User.IsInRole("admin"))
+                {
+                    <li class="nav-item"> @Html.ActionLink("EDIT", "EditRole", "Admin", new { area = "" }, new { @class = "navbar-brand" })</li>
+                }
+            </ul>
+        </nav>
+        <div class="col-auto">
+
+
+            @*Форма выбора показаний*@
+            @using (Html.BeginForm("IndicationTemp", "SchetchikInput", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Введите номер киоска и месяц показаний</span>
+                    </div>
+                    @*<input type="hidden" value="@ViewBag.BookId" name="BookId" />*@
+                    <input type="text" name="Nomer" value="0" aria-label="номер киоска" class="form-control" />
+                    @Html.DropDownList("Month", new SelectList(new string[] { "", "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" }), "Месяц")
+                    @*строка радиокнопок*@
+                    <div class="flex">
+                        <!-- Default inline 1-->
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" checked class="custom-control-input" value="1" id="defaultInline1" name="checkSort">
+                            <label class="custom-control-label" for="defaultInline1">по номеру киоска</label>
                         </div>
-                        <div class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav">
-                                <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
-                                <li>@Html.ActionLink("О программе", "About", "Home")</li>
-                                <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
-                            </ul>
+
+                        <!-- Default inline 2-->
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" value="2" id="defaultInline2" name="checkSort">
+                            <label class="custom-control-label" for="defaultInline2">по месяцу</label>
+                        </div>
+
+                        <!-- Default inline 3-->
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" value="3" id="defaultInline3" name="checkSort">
+                            <label class="custom-control-label" for="defaultInline3">по потреблению</label>
                         </div>
                     </div>
-                </div>
 
-            </div>
-            <div class="col-md-8 col-lg-6">
-                @*<div class="demo-content bg-alt">.col-sm-4</div>*@
-                <div class="row"> <h2>База киосков ГомельОблСоюзПечать</h2></div>
-            </div>
-            <div class="col-md-12 col-lg-3">
-                @*<div class="demo-content">.col-sm-4</div>*@
-                <ul>
-                    @if (!User.Identity.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("Войти", "Login", "Account")</li>
-                        <li>@Html.ActionLink("Регистрация", "Register", "Account")</li>
-                    }
-                    else
-                    {
-                        <li style="color:lightgray;">
-                            <a>@Html.ViewBag.Greeting  @User.Identity.Name</a>
-                        </li>
-                        <li>@Html.ActionLink("Выход", "Logout", "Account")</li>
-                    }
-                </ul>
-            </div>
+                    <button type="submit" value="показать" class="btn btn-primary mb-2" @*data-toggle="button"*@ aria-pressed="false" autocomplete="off">
+                        показать потребление
+                    </button>
+
+                </div>
+            }
         </div>
-        <hr>
-        <!--Row with three columns divided in 1:4:1 ratio-->
+
+    </div>
+    <hr>
+    <!--Row with three columns divided in 1:4:1 ratio-->
+    <section class="row">
+        <div id="categories" class="col-md-3 col-lg-2">
+            @*<div class="demo-content">.col-sm-2</div>*@
+
+            @{ Html.RenderAction("Menu", "Nav"); }
+
+        </div>
+        <div class="col-md-9 col-lg-9">
+            @RenderBody()
+            @*<div class="demo-content bg-alt">.col-sm-8</div>*@
+        </div>
+        <div class="col-md-12 col-lg-1">
+            @*<div class="demo-content">.col-sm-2</div>*@
+            @Html.Partial("IndicationInput")
+        </div>
+    </section>
+    <hr>
+    <!--Row with three columns divided unevenly-->
+    <footer>
         <div class="row">
-            <div id="categories" class="col-md-3 col-lg-2">
-                @*<div class="demo-content">.col-sm-2</div>*@
-                
-                @{ Html.RenderAction("Menu", "Nav"); }
-                
+            <div class="col">
+                <div class="demo-content">.col-sm-3</div>
             </div>
-            <div class="col-md-9 col-lg-9">
-                @RenderBody()
-                @*<div class="demo-content bg-alt">.col-sm-8</div>*@
+            <div class="col">
+                <div class="demo-content bg-alt">.col-sm-7</div>
             </div>
-            <div class="col-md-12 col-lg-1">
+            <div class="col">
                 <div class="demo-content">.col-sm-2</div>
             </div>
         </div>
-        <hr>
-        <!--Row with three columns divided unevenly-->
-        <footer>
-            <div class="row">
-                <div class="col">
-                    <div class="demo-content">.col-sm-3</div>
-                </div>
-                <div class="col">
-                    <div class="demo-content bg-alt">.col-sm-7</div>
-                </div>
-                <div class="col">
-                    <div class="demo-content">.col-sm-2</div>
-                </div>
-            </div>
-        </footer>
-    </div>
-    @Scripts.Render("~/bundles/jquery")
-    @Html.ActionLink("Домашняя страница", "Index", "Home")
+    </footer>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
     @RenderSection("scripts", required: false)
 </body>
 </html>                                		                            

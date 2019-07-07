@@ -1,51 +1,122 @@
 ﻿@using GospDiplom.BLL.DTO
 @model GospDiplom.WEB.Models.SchetchikViewModel
 
+<div>
+    <h4>Ежемесячный расход</h4>
+    <hr />
+    <dl class="dl-horizontal"></dl>
+</div>
+<div class="panel panel-primary table-responsive-lg">
+    <table class="table-responsive-xl table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">номер<br /> объекта</th>
+                <th scope="col">№ счетчика</th>
+                <th scope="col">тариф</th>
+                <th scope="col">январь</th>
+                <th scope="col">февраль</th>
+                <th scope="col">март</th>
+                <th scope="col">апрель</th>
+                <th scope="col">май</th>
+                <th scope="col">июнь</th>
+                <th scope="col">июль</th>
+                <th scope="col">август</th>
+                <th scope="col">сентябрь</th>
+                <th scope="col">октябрь</th>
+                <th scope="col">ноябрь</th>
+                <th scope="col">декабрь</th>
+                <th scope="col">год</th>
+            </tr>
+        </thead>
+        <tbody class="table-bordered ">
 
-@{
-    ViewBag.Title = "IndicationOneKioskAllMonth";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+            @{
+                int i = 0;
 
-<h2>3 Показания счетчиков киоска№ @ViewBag.Nomer</h2>
+                foreach (var items in (List<AllCounter>)ViewData["SchetchikAllCounters"])
+                {
 
-<hr />
-<table>
-    <tr>
-        <td>Номер киоска </td>
-        <td> Номер счетчика</td>
-        <td> Модель счетчика</td>
-        <td>Тариф 1 </td>
-        <td>Тариф 2 </td>
-        <td>Месяц</td>
-        <td> Двух тарифный</td>
-        <td>Тех учет </td>
-        <td> Организация</td>
-        <td>Договор </td>
-    </tr>
-    @foreach (var item in (List<AllCounter>)ViewData["SchetchikAllCounters"])
-    {
-        <tr>
-            <td> @Html.DisplayFor(modelItem => item.NomerKioska)</td>
+                    if (items.NomerCounter == Model.AllCounters.First().NomerCounter && i == 0)
+                    {
+                        double summ = 0;
+                        <tr>
+                            <td>&nbsp;@Html.DisplayFor(modelItem => Model.AllCounters.First().NomerKioska) </td>
+                            <td>&nbsp;@Html.DisplayFor(modelItem => Model.AllCounters.First().NomerCounter) </td>
+                            <td>&nbsp;@Html.DisplayFor(modelItem => Model.AllCounters.First().TwoTarif) </td>
 
-            <td> @Html.DisplayFor(modelItem => item.NomerCounter)</td>
+                            @for (int j = 1; j < 13; j++)
+                            {
+                                for (int m = 0; m < Model.AllCounters.Count(); m++)
+                                {
+                                    if (Model.AllCounters.Any(x => x.Date.Month == j && x.NomerCounter == items.NomerCounter))
+                                    {
+                                        summ = summ + Model.AllCounters.Where(x => x.Date.Month == j && x.NomerCounter == items.NomerCounter).First().Span;
+                                        // Html.DisplayFor(modelItem => Model.AllCounters.Where(x => x.Date.Month == j && x.NomerCounter == items.NomerCounter).First().Span);
+                                        <td>
+                                            @Model.AllCounters.Where(x => x.Date.Month == j && x.NomerCounter == items.NomerCounter).First().Span.ToString()
+                                        </td>
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        <td> @Html.Raw("0")</td>
+                                        break;
+                                    }
+                                }
 
-            <td> @Html.DisplayFor(modelItem => item.ModelCounter)</td>
+                            }
+                            <td> &nbsp;@summ.ToString();</td>
+                        </tr>
+                    }
 
-            <td> @Html.DisplayFor(modelItem => item.Tarif1)</td>
+                    if (items.NomerCounter != Model.AllCounters.First().NomerCounter && i != 0)
+                    {
+                        double summ = 0;
+                        <tr>
+                            <td>&nbsp;@Html.DisplayFor(modelItem => items.NomerKioska) </td>
+                            <td>&nbsp;@Html.DisplayFor(modelItem => items.NomerCounter) </td>
+                            <td>&nbsp;@Html.DisplayFor(modelItem => items.TwoTarif) </td>
 
-            <td> @Html.DisplayFor(modelItem => item.Tarif2)</td>
 
-            <td> @Html.DisplayFor(modelitem => item.Month) </td>
+                            @for (int j = 1; j < 13; j++)
+                            {
+                                for (int m = 0; m < Model.AllCounters.Count(); m++)
+                                {
+                                    if (Model.AllCounters.Any(x => x.Date.Month == j && x.NomerCounter == items.NomerCounter))
+                                    {
+                                        summ = summ + Model.AllCounters.Where(x => x.Date.Month == j && x.NomerCounter == items.NomerCounter).First().Span;
+                                        // Html.DisplayFor(modelItem => Model.AllCounters.Where(x => x.Date.Month == j && x.NomerCounter == items.NomerCounter).First().Span);
+                                        <td>
+                                            @Model.AllCounters.Where(x => x.Date.Month == j && x.NomerCounter == items.NomerCounter).First().Span.ToString()
+                                        </td>
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @Html.Raw("0")
+                                        </td>
+                                        break;
+                                    }
+                                }
+                            }
+                            <td>
+                                &nbsp;
+                                @summ.ToString();
+                            </td>
+                        </tr>
+                    }
+                    i = i + 1;
+                }
+            }
 
-            <td> @Html.DisplayFor(modelItem => item.TwoTarif)</td>
+        </tbody>
+    </table>
+</div>
 
-            <td> @Html.DisplayFor(modelItem => item.TechUchet)</td>
 
-            <td> @Html.DisplayFor(modelItem => item.OrgName)</td>
 
-            <td>@Html.DisplayFor(modelItem => item.Dogovor)</td>
-        </tr>
-    }
-</table>
-<hr />
+@*<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</div>*@

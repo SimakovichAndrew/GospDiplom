@@ -11,8 +11,9 @@ namespace GospDiplom.BLL.DTO
         public int NomerCounter { get; set; }
         public string ModelCounter { get; set; }
         public string NomerKioska { get; set; }
-        public double Tarif1 { get; set; }
-        public double Tarif2 { get; set; }
+        public double Tarif1Start { get; set; }
+        public double Tarif1End { get; set; }
+        public double Span { get; set; }
         public bool TechUchet { get; set; }
         public bool TwoTarif { get; set; }
         public string Month { get; set; }

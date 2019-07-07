@@ -16,6 +16,7 @@ namespace GospDiplom.BLL.Interfaces
         Task<ClaimsIdentity> Authenticate(UserDTO userDto);
         Task SetInitialData(UserDTO AdminDto, List<string> roles);
         UserDTO FindByName(/*int? id*/string name);
+        Task<OperationDetails> EditRole(string name, string role, bool z);
     }
 
 }
