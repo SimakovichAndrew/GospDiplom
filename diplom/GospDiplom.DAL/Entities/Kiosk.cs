@@ -43,11 +43,21 @@ namespace GospDiplom.DAL.Entities
         //public Nullable<int> EquipmentId { get; set; }
         //ссылка на оборудование
         public virtual ICollection<EquipmentKiosk> EquipmentKiosk { get; set; }
+
+    public Towns kioskTown(string t)
+    {
+            //string town = null;
+            foreach (Towns i in Enum.GetValues(typeof(Towns)))
+            {
+                if (t.Equals(i.ToString()))
+                { return i ; }
+            }
+            return 0;
+    }
     }
 
    public enum Towns
     {
-        Гомель, Ветка, БудаКошелёва, Добруш, Речица, Хойники, Жлобин, Рогачев, Корма, Брагин, Лоев, Чечерск, Светлогорск, Октябрьский, Мозырь, Калинковичи, Петриков, Житковичи, Туров, Наровля, Ельск, Лельчицы 
+        Гомель, Ветка, БудаКошелева, Добруш, Речица, Хойники, Жлобин, Рогачев, Корма, Брагин, Лоев, Чечерск, Светлогорск, Октябрьский, Мозырь, Калинковичи, Петриков, Житковичи, Туров, Наровля, Ельск, Лельчицы 
     }
-
 }

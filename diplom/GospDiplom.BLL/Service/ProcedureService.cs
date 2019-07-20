@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
 using System.Linq;
+using System.Data.OleDb;
 
 namespace GospDiplom.BLL.Service
 {
@@ -305,20 +306,21 @@ namespace GospDiplom.BLL.Service
             {
                 if (String.IsNullOrEmpty((GetInfoCounter.Where(y => y.NomerSchetchika == GetInfoCounter.ElementAt(i).NomerSchetchika).First().Month.Month - 1).ToString()) || (GetInfoCounter.Where(y => y.NomerSchetchika == GetInfoCounter.ElementAt(i).NomerSchetchika).First().Month.Month - 1) == 0)
                     diff = 0;
-                else 
+                else
                 if (GetInfoCounter.Any(x => x.Month.Month == (GetInfoCounter.ElementAt(i).Month.Month - 1) && x.NomerSchetchika == GetInfoCounter.ElementAt(i).NomerSchetchika))
                     diff = GetInfoCounter.Where(x => x.Month.Month == (GetInfoCounter.ElementAt(i).Month.Month - 1) && x.NomerSchetchika == GetInfoCounter.ElementAt(i).NomerSchetchika).First().Tarif1;
                 else
                     diff = 0;
 
-              //  var elem = GetInfoCounter.First();
+                //  var elem = GetInfoCounter.First();
                 //    foreach (var item in GetInfoCounter.Where(x=>x.Nomer==GetInfoCounter.ElementAt(i).Nomer))
                 //{
                 //   var elem = item;
-              
+
                 GetCounter.Add(
-                new AllCounter{
-                    NomerCounter =  GetInfoCounter/*.Where(x => x.Nomer == GetInfoCounter.ElementAt(i).Nomer).ElementAt(y)*/.ElementAt(i).NomerSchetchika,
+                new AllCounter
+                {
+                    NomerCounter = GetInfoCounter/*.Where(x => x.Nomer == GetInfoCounter.ElementAt(i).Nomer).ElementAt(y)*/.ElementAt(i).NomerSchetchika,
                     NomerKioska = GetInfoCounter.ElementAt(i).Nomer,
                     ModelCounter = GetInfoCounter.ElementAt(i).ModelSchetchika,
                     Tarif1Start = diff/*GetInfoCounter.ElementAt(i).Tarif1*/,
@@ -372,8 +374,8 @@ namespace GospDiplom.BLL.Service
             var mapperIndication = new MapperConfiguration(cfg => cfg.CreateMap<Indication, IndicationDTO>()).CreateMapper();
             var indicat = mapperIndication.Map<IEnumerable<Indication>, List<IndicationDTO>>(Database.Indications.GetAll());
 
-            int GetIndication= indicat
-                .Where(x=>x.SchetchikId==count.Where(y=>y.KioskId==kioski.Where(k=>k.Nomer==nomer).First().KioskId).First().SchetchikId).First().IndicationId;
+            int GetIndication = indicat
+                .Where(x => x.SchetchikId == count.Where(y => y.KioskId == kioski.Where(k => k.Nomer == nomer).First().KioskId).First().SchetchikId).First().IndicationId;
             //GetIndication.Tarif1 = tarif1;
             //GetIndication.Tarif2 = tarif2;
             Database.Indications.Get(GetIndication).Tarif1 = tarif1;
@@ -382,5 +384,220 @@ namespace GospDiplom.BLL.Service
 
             //throw new NotImplementedException();
         }
+
+        public void UpdateKiosks()
+        {   //--------------------------------------------------------------------------------------------
+            // String excelConnString = String.Format("Provider=Microsoft.JET.OLEDB.4.0;Data Source={0};Extended Properties=\"Excel 8.0\"", @"D:\kioski.xls"/*filePath*/);
+            String excelConnString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source= F:\kioski.xlsx;Extended Properties='Excel 12.0 Xml;HDR=YES;'"/*filePath*/;
+
+            //if (fileExtension == ".xls")
+            //    conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Import_FileName + ";" + "Extended Properties='Excel 8.0;HDR=YES;'";
+            //if (fileExtension == ".xlsx")
+            //    conn.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Import_FileName + ";" + "Extended Properties='Excel 12.0 Xml;HDR=YES;'";
+
+            // применяем автомаппер для проекции одной коллекции на другую
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Kiosk, KioskDTO>()).CreateMapper();
+            var kioski = mapper.Map<IEnumerable<Kiosk>, List<KioskDTO>>(Database.Kiosks.GetAll());
+
+            //Create Connection to Excel work book 
+            using (OleDbConnection excelConnection = new OleDbConnection(excelConnString))
+            {
+                //Create OleDbCommand to fetch data from Excel 
+                using (OleDbCommand cmd = new OleDbCommand("Select * from [adress$]", excelConnection))
+                {
+                    excelConnection.Open();
+                    using (OleDbDataReader dReader = cmd.ExecuteReader())
+                    {
+                        //using (SqlBulkCopy sqlBulk = new SqlBulkCopy(strConnection))
+                        //{
+                        //    //Give your Destination table name 
+                        //    sqlBulk.DestinationTableName = "Excel_table";
+                        //    sqlBulk.WriteToServer(dReader);
+                        int IdKiosk = 0;
+                        Kiosk townKiosk = new Kiosk();
+                        Type myType = typeof(Towns);
+                        // string townKiosk = "Брагин";
+                        while (dReader.Read())
+                        {
+                            IdKiosk = kioski
+                            .Where(x => x.Nomer == dReader[0].ToString()).First().KioskId;
+                            Database.Kiosks.Get(IdKiosk).Town = townKiosk.kioskTown(dReader[4].ToString());
+                            var row1Col1 = dReader[1];
+                            Database.Kiosks.Get(IdKiosk).Adress = dReader[6].ToString();
+                            Database.Kiosks.Get(IdKiosk).ModelKioska = dReader[1].ToString();
+                            Database.Save();
+                        }
+                        //}
+                    }
+                }
+            }
+
+            //  throw new NotImplementedException();
+        }
+
+        public void UpdateCounters()
+        {
+            String excelConnString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source= F:\kioski.xlsx;Extended Properties='Excel 12.0 Xml;HDR=YES;'"/*filePath*/;
+
+            //if (fileExtension == ".xls")
+            //    conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Import_FileName + ";" + "Extended Properties='Excel 8.0;HDR=YES;'";
+            //if (fileExtension == ".xlsx")
+            //    conn.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Import_FileName + ";" + "Extended Properties='Excel 12.0 Xml;HDR=YES;'";
+
+            // применяем автомаппер для проекции одной коллекции на другую
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Kiosk, KioskDTO>()).CreateMapper();
+            var kioski = mapper.Map<IEnumerable<Kiosk>, List<KioskDTO>>(Database.Kiosks.GetAll());
+
+            var mapperOrg = new MapperConfiguration(cfg => cfg.CreateMap<Organization, OrganizationDTO>()).CreateMapper();
+            var org = mapperOrg.Map<IEnumerable<Organization>, List<OrganizationDTO>>(Database.Organizations.GetAll());
+
+            var mapperCount = new MapperConfiguration(cfg => cfg.CreateMap<Schetchik, SchetchikDTO>()).CreateMapper();
+            var count = mapperCount.Map<IEnumerable<Schetchik>, List<SchetchikDTO>>(Database.Schetchiks.GetAll());
+
+            var mapperIndication = new MapperConfiguration(cfg => cfg.CreateMap<Indication, IndicationDTO>()).CreateMapper();
+            var indicat = mapperIndication.Map<IEnumerable<Indication>, List<IndicationDTO>>(Database.Indications.GetAll());
+
+
+            //Create Connection to Excel work book 
+            using (OleDbConnection excelConnection = new OleDbConnection(excelConnString))
+            {
+                //Create OleDbCommand to fetch data from Excel 
+                using (OleDbCommand cmd = new OleDbCommand("Select * from [counter$]", excelConnection))
+                {
+                    excelConnection.Open();
+                    using (OleDbDataReader dReader = cmd.ExecuteReader())
+                    {
+                        Schetchik schetchik = new Schetchik();
+                        int IdCounter = 1;
+                        // Kiosk townKiosk = new Kiosk();
+
+                        while (dReader.Read())
+                        {
+                            if (count.Any(x => x.KioskId == kioski.Where(y => y.Nomer == dReader[2].ToString()).First().KioskId))
+                            {
+                                IdCounter = count.Where(x => x.KioskId == kioski.Where(y => y.Nomer == dReader[2].ToString()).First().KioskId).First().SchetchikId;
+                                Database.Schetchiks.Get(IdCounter).ModelSchetchika = dReader[4].ToString();
+                                Database.Schetchiks.Get(IdCounter).NomerSchetchika = dReader[1].ToString();
+                            }
+                            else
+                            {
+                                //schetchik.KioskId = kioski.Where(x => x.Nomer == dReader[2].ToString()).First().KioskId;
+                                //Database.Schetchiks.Create(schetchik);
+                                //Database.Save();
+                                //IdCounter=
+                                Database.Schetchiks.Create(new Schetchik { ModelSchetchika = dReader[4].ToString(), NomerSchetchika = dReader[1].ToString(), KioskId = kioski.Where(x => x.Nomer == dReader[2].ToString()).First().KioskId });
+                            }
+
+
+
+                            Database.Save();
+                        }
+                        //}
+                    }
+                }
+            }
+            //throw new NotImplementedException();
+        }
+
+        public void EditKiosk(KioskDTO kiosk)
+        {
+            Database.Kiosks.Get(kiosk.KioskId).Section.AreaSection = kiosk.Area;
+
+            Database.Kiosks.Get(kiosk.KioskId).ModelKioska = kiosk.ModelKioska;
+
+            Database.Kiosks.Get(kiosk.KioskId).Adress = kiosk.Adress;
+
+            Database.Kiosks.Get(kiosk.KioskId).Arenda = kiosk.Arenda;
+
+            //Database.Kiosks.Get(kiosk.KioskId).EquipmentKiosk = kiosk.;
+
+            Database.Kiosks.Get(kiosk.KioskId).ModelKioska = kiosk.ModelKioska;
+
+            Database.Save();
+            //throw new NotImplementedException();
+        }
+
+        public void UpdateIndicat()
+        {
+            String excelConnString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source= F:\kioski.xlsx;Extended Properties='Excel 12.0 Xml;HDR=YES;'"/*filePath*/;
+
+            //if (fileExtension == ".xls")
+            //    conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Import_FileName + ";" + "Extended Properties='Excel 8.0;HDR=YES;'";
+            //if (fileExtension == ".xlsx")
+            //    conn.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Import_FileName + ";" + "Extended Properties='Excel 12.0 Xml;HDR=YES;'";
+
+            // применяем автомаппер для проекции одной коллекции на другую
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Kiosk, KioskDTO>()).CreateMapper();
+            var kioski = mapper.Map<IEnumerable<Kiosk>, List<KioskDTO>>(Database.Kiosks.GetAll());
+
+            var mapperOrg = new MapperConfiguration(cfg => cfg.CreateMap<Organization, OrganizationDTO>()).CreateMapper();
+            var org = mapperOrg.Map<IEnumerable<Organization>, List<OrganizationDTO>>(Database.Organizations.GetAll());
+
+            var mapperCount = new MapperConfiguration(cfg => cfg.CreateMap<Schetchik, SchetchikDTO>()).CreateMapper();
+            var count = mapperCount.Map<IEnumerable<Schetchik>, List<SchetchikDTO>>(Database.Schetchiks.GetAll());
+
+            var mapperIndication = new MapperConfiguration(cfg => cfg.CreateMap<Indication, IndicationDTO>()).CreateMapper();
+            var indicat = mapperIndication.Map<IEnumerable<Indication>, List<IndicationDTO>>(Database.Indications.GetAll());
+
+
+            //Create Connection to Excel work book 
+            using (OleDbConnection excelConnection = new OleDbConnection(excelConnString))
+            {
+                //Create OleDbCommand to fetch data from Excel 
+                using (OleDbCommand cmd = new OleDbCommand("Select * from [indicat$]", excelConnection))
+                {
+                    excelConnection.Open();
+                    using (OleDbDataReader dReader = cmd.ExecuteReader())
+                    {
+                        Schetchik schetchik = new Schetchik();
+                        int IdIndicat = 1;
+                        // Kiosk townKiosk = new Kiosk();
+                        dReader.Read();
+                        while (dReader.Read())
+                        {
+                            if (indicat.Any(x => x.SchetchikId == count.Where(y => y.KioskId == kioski.Where(z => z.Nomer == dReader[1].ToString()).First().KioskId).First().SchetchikId))
+                            {
+                                IdIndicat = indicat.Where(x => x.SchetchikId == count.Where(y => y.KioskId == kioski.Where(z => z.Nomer == dReader[1].ToString()).First().KioskId).First().SchetchikId).First().IndicationId;
+
+                                for (int date = 1; date < DateTime.Now.Month; date++)
+                                {
+                                    if (Database.Indications.Get(IdIndicat).Month.Month == date)
+                                    {
+                                        Database.Indications.Get(IdIndicat).Tarif1 = double.Parse(dReader[date + 2].ToString());
+                                    }
+                                    else
+                                    {
+                                        Database.Indications.Create(new Indication { Month = new DateTime(DateTime.Now.Year, date, 25), Tarif1 = double.Parse(dReader[date + 2].ToString()), SchetchikId = count.Where(cid => cid.KioskId == kioski.Where(x => x.Nomer == dReader[1].ToString()).First().KioskId).First().SchetchikId });
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                //schetchik.KioskId = kioski.Where(x => x.Nomer == dReader[2].ToString()).First().KioskId;
+                                //Database.Schetchiks.Create(schetchik);
+                                //Database.Save();
+                                //IdCounter=
+                                for (int date = 1; date < DateTime.Now.Month; date++)
+                                {
+                                    Database.Indications.Create(new Indication { Month = new DateTime(DateTime.Now.Year, date, 25), Tarif1 = double.Parse(dReader[date + 2].ToString()), SchetchikId = count.Where(cid => cid.KioskId == kioski.Where(x => x.Nomer == dReader[1].ToString()).First().KioskId).First().SchetchikId });
+                                }
+                            }
+
+
+
+                            Database.Save();
+                        }
+                        //}
+                    }
+                }
+                //throw new NotImplementedException();
+            }
+        }
     }
 }
+
+//using (SqlBulkCopy sqlBulk = new SqlBulkCopy(strConnection))
+//{
+//    //Give your Destination table name 
+//    sqlBulk.DestinationTableName = "Excel_table";
+//    sqlBulk.WriteToServer(dReader);

@@ -10,6 +10,7 @@ namespace GospDiplom.WEB.Models
     {
         //public string OrgName { get; set; }
         //public int Dogovor { get; set; }
+        public IEnumerable<AllCounter> AllCounters { get; set; }
         public IEnumerable<AllTable> AllKioski { get; set; }
         public PagingInfo PagingInfoCom { get; set; }
 

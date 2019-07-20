@@ -13,7 +13,7 @@ namespace GospDiplom.WEB.Controllers
     public class EditKioskController : Controller
     {
         IProcedureService orderService;
-
+        public int PageCom = 25;
 
         public EditKioskController(IProcedureService serv)
         {
@@ -36,7 +36,8 @@ namespace GospDiplom.WEB.Controllers
             ViewBag.OrgNames = orgName;
             //OrganizationId добавить метод в бизнес логику для добавления киоска в контрагента
             IEnumerable<AllTable> tableKioski = orderService.GetAllKioski();
-            KioskViewModel editKiosk = new KioskViewModel {
+            KioskViewModel editKiosk = new KioskViewModel
+            {
                 OrgName = orgName,
                 Adress = kiosk.Adress,
                 Area = kiosk.Area,
@@ -46,17 +47,101 @@ namespace GospDiplom.WEB.Controllers
                 Nomer = kiosk.Nomer,
                 OrganizationId = (int)kiosk.OrganizationId,
                 KioskId = kiosk.KioskId
-            }; 
+            };
             return View(editKiosk);
         }
 
         [HttpPost]
         public ActionResult EditKiosk(EditKioskModels kiosk)
         {
-
+            KioskDTO editKiosk = new KioskDTO
+            {
+                ModelKioska = "Редактируется"
+            };
+           orderService.EditKiosk(editKiosk);
             ViewBag.TempKiosk = "TEMP";
 
-            return View("Login");
+            return View("Index", "Home");
+
         }
+
+        //[HttpGet]
+        public ActionResult KioskUpDate(int page = 1)
+        {
+            orderService.UpdateKiosks();
+            IEnumerable<AllTable> tableKioski = orderService.GetAllKioski();
+            ViewBag.totalInfo = tableKioski;
+            InputViewModels listInput = new InputViewModels
+            {
+                AllKioski = tableKioski
+                .Skip((page - 1) * PageCom)
+                .Take(PageCom),
+                PagingInfoCom = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageCom,
+                    TotalItems = orderService.GetAllKioski().Count()
+                }
+
+            };
+            RedirectToAction("Index", "Home", listInput);
+            return View("Index");
+        }
+
+        //[HttpGet]
+        public ActionResult CounterUpDate(int page = 1)
+        {
+            orderService.UpdateCounters();
+            IEnumerable<AllCounter> tableCounter = orderService.GetAllCounters();
+            ViewBag.totalInfo = tableCounter;
+            InputViewModels listInput = new InputViewModels
+            {
+               AllCounters = tableCounter
+                .Skip((page - 1) * PageCom)
+                .Take(PageCom),
+                PagingInfoCom = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageCom,
+                    TotalItems = orderService.GetAllCounters().Count()
+                }
+
+            };
+
+            
+            RedirectToAction("Index", "Home", listInput);
+            
+            return View("Index");
+        }
+
+        //[HttpGet]
+        public ActionResult IndicatUpDate(int page = 1)
+        {
+            orderService.UpdateIndicat();
+          //  IEnumerable<IndicationDTO> indicationDTOs = orderService.GetIndications();
+          IEnumerable<AllCounter> tableCounter = orderService.GetAllCounters();
+            ViewBag.totalInfo = tableCounter;
+            InputViewModels listInput = new InputViewModels
+            {
+                AllCounters = tableCounter
+                .Skip((page - 1) * PageCom)
+                .Take(PageCom),
+                PagingInfoCom = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageCom,
+                    TotalItems = orderService.GetAllCounters().Count()
+                }
+
+            };
+
+
+            RedirectToAction("Index", "Home", listInput);
+
+            return View("Index");
+        }
+
+
+
     }
 }

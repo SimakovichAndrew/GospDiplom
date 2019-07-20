@@ -24,6 +24,10 @@ namespace GospDiplom.BLL.Interfaces
         IEnumerable<AllCounter> GetAllCounters();
         AllCounter GetInfoCounter(int? id);
         void CreateIndication(string nomer, double tarif1, double tarif2);
+        void UpdateKiosks();
+        void UpdateCounters();
+        void EditKiosk(KioskDTO kiosk);
+        void UpdateIndicat();
         //void Dispose();// ???
     }
 }

@@ -99,8 +99,28 @@ namespace GospDiplom.WEB.Controllers
         }
 
 
+        //[HttpGet]
+        public ActionResult BaseUpDate(int page = 1)
+        {
+            orderService.UpdateKiosks();
+            IEnumerable<AllTable> tableKioski = orderService.GetAllKioski();
+            ViewBag.totalInfo = tableKioski;
+            InputViewModels listInput = new InputViewModels
+            {
+                AllKioski = tableKioski
+                .Skip((page - 1) * PageCom)
+                .Take(PageCom),
+                PagingInfoCom = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageCom,
+                    TotalItems = orderService.GetAllKioski().Count()
+                }
 
+            };
 
+            return View("Index", listInput);
+        }
 
         public ActionResult MakeOrder()
         {

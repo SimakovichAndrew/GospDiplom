@@ -7,12 +7,12 @@
     <dl class="dl-horizontal"></dl>
 </div>
 <div class="panel panel-primary table-responsive-lg">
-    <table class="table-responsive-xl table-bordered">
+    <table class="table-responsive-xl">
         <thead>
             <tr>
                 <th scope="col">номер<br /> объекта</th>
                 <th scope="col">№ счетчика</th>
-                <th scope="col">тариф</th>
+                <th scope="col"> ночной<br /> тариф</th>
                 <th scope="col">январь</th>
                 <th scope="col">февраль</th>
                 <th scope="col">март</th>
@@ -28,13 +28,14 @@
                 <th scope="col">год</th>
             </tr>
         </thead>
-        <tbody class="table-bordered ">
+        <tbody>
 
             @{
                 int i = 0;
-
+                string temp = "";
                 foreach (var items in (List<AllCounter>)ViewData["SchetchikAllCounters"])
                 {
+
 
                     if (items.NomerCounter == Model.AllCounters.First().NomerCounter && i == 0)
                     {
@@ -46,21 +47,22 @@
 
                             @for (int j = 1; j < 13; j++)
                             {
-                                for (int m = 0; m < Model.AllCounters.Count(); m++)
+                            for (int m = 0; m < Model.AllCounters.Count(); m++)
+                            {
+                                if (Model.AllCounters.Any(x => x.Date.Month == j && x.NomerCounter == items.NomerCounter))
                                 {
-                                    if (Model.AllCounters.Any(x => x.Date.Month == j && x.NomerCounter == items.NomerCounter))
-                                    {
-                                        summ = summ + Model.AllCounters.Where(x => x.Date.Month == j && x.NomerCounter == items.NomerCounter).First().Span;
+                                    summ = summ + Model.AllCounters.Where(x => x.Date.Month == j && x.NomerCounter == items.NomerCounter).First().Span;
                                         // Html.DisplayFor(modelItem => Model.AllCounters.Where(x => x.Date.Month == j && x.NomerCounter == items.NomerCounter).First().Span);
                                         <td>
                                             @Model.AllCounters.Where(x => x.Date.Month == j && x.NomerCounter == items.NomerCounter).First().Span.ToString()
                                         </td>
+                                        temp = items.NomerCounter;
                                         break;
                                     }
                                     else
                                     {
                                         <td> @Html.Raw("0")</td>
-                                        break;
+                                        temp = items.NomerCounter; break;
                                     }
                                 }
 
@@ -69,7 +71,7 @@
                         </tr>
                     }
 
-                    if (items.NomerCounter != Model.AllCounters.First().NomerCounter && i != 0)
+                    if (items.NomerCounter != temp/*Model.AllCounters.First().NomerCounter*/ && i != 0)
                     {
                         double summ = 0;
                         <tr>
@@ -80,29 +82,29 @@
 
                             @for (int j = 1; j < 13; j++)
                             {
-                                for (int m = 0; m < Model.AllCounters.Count(); m++)
+                            for (int m = 0; m < Model.AllCounters.Count(); m++)
+                            {
+                                if (Model.AllCounters.Any(x => x.Date.Month == j && x.NomerCounter == items.NomerCounter))
                                 {
-                                    if (Model.AllCounters.Any(x => x.Date.Month == j && x.NomerCounter == items.NomerCounter))
-                                    {
-                                        summ = summ + Model.AllCounters.Where(x => x.Date.Month == j && x.NomerCounter == items.NomerCounter).First().Span;
+                                    summ = summ + Model.AllCounters.Where(x => x.Date.Month == j && x.NomerCounter == items.NomerCounter).First().Span;
                                         // Html.DisplayFor(modelItem => Model.AllCounters.Where(x => x.Date.Month == j && x.NomerCounter == items.NomerCounter).First().Span);
                                         <td>
                                             @Model.AllCounters.Where(x => x.Date.Month == j && x.NomerCounter == items.NomerCounter).First().Span.ToString()
                                         </td>
-                                        break;
+                                        temp = items.NomerCounter; break;
                                     }
                                     else
                                     {
                                         <td>
                                             @Html.Raw("0")
                                         </td>
-                                        break;
+                                        temp = items.NomerCounter; break;
                                     }
                                 }
                             }
                             <td>
                                 &nbsp;
-                                @summ.ToString();
+                        @summ.ToString();
                             </td>
                         </tr>
                     }

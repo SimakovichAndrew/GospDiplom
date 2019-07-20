@@ -95,10 +95,41 @@ hr {
 
 table {
     font-size: medium;
+    /*border: 3px solid blue;*/
+}
+
+td {
+    padding-left: 5px;
+    /*border: 1px solid blue !important;*/
+}
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid blue !important;
 }
 
 thead {
     background-color: cornflowerblue;
+    border: 1px solid /*#dee2e6*/blue !important;
 }
 
+div.pager{
+    text-align:right;
+    border-top: 2px solid silver;
+    padding: .5em 0 0 0;
+    margin-top: 1em;
+}
+div.pager a{
+    font-size: 1.1 em;
+    color: #666;
+    text-decoration: none;
+    padding: 0 0.4 0 .4em;
 
+}
+
+div.pager a:hover{
+    background-color: silver;
+}
+
+div.pager a.selected{
+    background-color: #353535;color: white;
+}

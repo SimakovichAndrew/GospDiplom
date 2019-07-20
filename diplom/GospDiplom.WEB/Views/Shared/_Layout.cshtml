@@ -46,6 +46,7 @@
                 @if (User.IsInRole("admin"))
                 {
                     <li class="nav-item"> @Html.ActionLink("EDIT", "EditRole", "Admin", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li class="nav-ite"> @Html.ActionLink("UPDATE", "Index", "EditKiosk", new { area = "" }, new { @class = "navbar-brand" })</li>
                 }
             </ul>
         </nav>
@@ -62,32 +63,39 @@
                     </div>
                     @*<input type="hidden" value="@ViewBag.BookId" name="BookId" />*@
                     <input type="text" name="Nomer" value="0" aria-label="номер киоска" class="form-control" />
-                    @Html.DropDownList("Month", new SelectList(new string[] { "", "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" }), "Месяц")
+                    @Html.DropDownList("Month", new SelectList(new string[] { "Месяц", "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" }), "Месяц")
                     @*строка радиокнопок*@
-                    <div class="flex">
-                        <!-- Default inline 1-->
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" checked class="custom-control-input" value="1" id="defaultInline1" name="checkSort">
-                            <label class="custom-control-label" for="defaultInline1">по номеру киоска</label>
+                    <div>
+                        <div class="col-12">
+                            <h3>сортировать показания</h3>
+                        </div>
+                        <div class="flex">
+                            <!-- Default inline 1-->
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" checked class="custom-control-input" value="1" id="defaultInline1" name="checkSort">
+                                <label class="custom-control-label" for="defaultInline1">по номеру киоска</label>
+                            </div>
+
+                            <!-- Default inline 2-->
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" value="2" id="defaultInline2" name="checkSort">
+                                <label class="custom-control-label" for="defaultInline2">по месяцу</label>
+                            </div>
+
+                            <!-- Default inline 3-->
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" value="3" id="defaultInline3" name="checkSort">
+                                <label class="custom-control-label" for="defaultInline3">по потреблению</label>
+                            </div>
                         </div>
 
-                        <!-- Default inline 2-->
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" value="2" id="defaultInline2" name="checkSort">
-                            <label class="custom-control-label" for="defaultInline2">по месяцу</label>
-                        </div>
-
-                        <!-- Default inline 3-->
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" value="3" id="defaultInline3" name="checkSort">
-                            <label class="custom-control-label" for="defaultInline3">по потреблению</label>
-                        </div>
+                        <button type="submit" name="btn" value="span" class="btn btn-primary mb-2" @*data-toggle="button"*@ aria-pressed="false" autocomplete="off">
+                            показать потребление
+                        </button>
+                        <button type="submit" name="btn" value="kiosk" class="btn btn-primary mb-2" @*data-toggle="button"*@ aria-pressed="false" autocomplete="off">
+                            показать киоски
+                        </button>
                     </div>
-
-                    <button type="submit" value="показать" class="btn btn-primary mb-2" @*data-toggle="button"*@ aria-pressed="false" autocomplete="off">
-                        показать потребление
-                    </button>
-
                 </div>
             }
         </div>
@@ -116,13 +124,16 @@
     <footer>
         <div class="row">
             <div class="col">
-                <div class="demo-content">.col-sm-3</div>
+                <div>Тип торгового объекта "Киоск"</div>
+                <div class="demo-content bg-alt">@Html.Partial("_ImageKiosk")</div>
             </div>
             <div class="col">
-                <div class="demo-content bg-alt">.col-sm-7</div>
+                <div>Неизолированный торговый объект</div>
+                <div class="demo-content bg-alt" style="max-height:inherit">@Html.Partial("_ImageObject")</div>
             </div>
             <div class="col">
-                <div class="demo-content">.col-sm-2</div>
+                <div>Тип торгового объекта "Павильон"</div>
+                <div class="demo-content bg-alt">@Html.Partial("_ImagePavilion")</div>
             </div>
         </div>
     </footer>

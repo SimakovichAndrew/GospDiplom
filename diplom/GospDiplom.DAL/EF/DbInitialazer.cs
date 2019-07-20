@@ -6,13 +6,27 @@ using GospDiplom.DAL.Entities;
 using GospDiplom.DAL.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
+using System.Data.OleDb;
+using System.Data.SqlClient;
 
 namespace GospDiplom.DAL.EF
 {
    public class DbInitialazer : DropCreateDatabaseIfModelChanges/*DropCreateDatabaseAlways*/<GospContext>
     {
+        private readonly SqlConnection strConnection;
+
+
+
         protected override void Seed(GospContext db)
         {
+
+         
+
+
+
+
+
+
             // base.Seed(db);
             var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
 
@@ -141,31 +155,31 @@ namespace GospDiplom.DAL.EF
             {
                 new Schetchik
                 {
-                     ModelSchetchika="Mirtek", NomerSchetchika=12345, TexUchet=false, TwoTarif=false, KioskId=1
+                     ModelSchetchika="Mirtek", NomerSchetchika="12345", TexUchet=false, TwoTarif=false, KioskId=1
                 },
                  new Schetchik
                 {
-                     ModelSchetchika="Energomer", NomerSchetchika=23456, TexUchet=true, TwoTarif=true, KioskId=1
+                     ModelSchetchika="Energomer", NomerSchetchika="23456", TexUchet=true, TwoTarif=true, KioskId=1
                 },
                   new Schetchik
                 {
-                     ModelSchetchika="Mirtek", NomerSchetchika=34567, TexUchet=false, TwoTarif=true, KioskId=2
+                     ModelSchetchika="Mirtek", NomerSchetchika="34567", TexUchet=false, TwoTarif=true, KioskId=2
                 },
                    new Schetchik
                 {
-                     ModelSchetchika="Energomer", NomerSchetchika=45678, TexUchet=true, TwoTarif=false, KioskId=2
+                     ModelSchetchika="Energomer", NomerSchetchika="45678", TexUchet=true, TwoTarif=false, KioskId=2
                 },
                     new Schetchik
                 {
-                     ModelSchetchika="Mirtek", NomerSchetchika=56789, TexUchet=false, TwoTarif=true, KioskId=3
+                     ModelSchetchika="Mirtek", NomerSchetchika="56789", TexUchet=false, TwoTarif=true, KioskId=3
                 },
                      new Schetchik
                 {
-                     ModelSchetchika="Energomer", NomerSchetchika=67890, TexUchet=false, TwoTarif=false, KioskId=3
+                     ModelSchetchika="Energomer", NomerSchetchika="67890", TexUchet=false, TwoTarif=false, KioskId=3
                 },
                       new Schetchik
                 {
-                     ModelSchetchika="Mirtek", NomerSchetchika=78901, TexUchet=false, TwoTarif=true, KioskId=4
+                     ModelSchetchika="Mirtek", NomerSchetchika="78901", TexUchet=false, TwoTarif=true, KioskId=4
                 }
             });
 
@@ -196,7 +210,68 @@ namespace GospDiplom.DAL.EF
             });
 
             db.SaveChanges();
+
+
+            //--------------------------------------------------------------------------------------------
+            // String excelConnString = String.Format("Provider=Microsoft.JET.OLEDB.4.0;Data Source={0};Extended Properties=\"Excel 8.0\"", @"D:\kioski.xls"/*filePath*/);
+            String excelConnString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source= D:\kioski.xlsx;Extended Properties='Excel 12.0 Xml;HDR=YES;'"/*filePath*/;
+
+            //if (fileExtension == ".xls")
+            //    conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Import_FileName + ";" + "Extended Properties='Excel 8.0;HDR=YES;'";
+            //if (fileExtension == ".xlsx")
+            //    conn.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Import_FileName + ";" + "Extended Properties='Excel 12.0 Xml;HDR=YES;'";
+
+
+            //Create Connection to Excel work book 
+            //using (OleDbConnection excelConnection = new OleDbConnection(excelConnString))
+            //{
+            //    //Create OleDbCommand to fetch data from Excel 
+            //    using (OleDbCommand cmd = new OleDbCommand("Select * from [adress$]", excelConnection))
+            //    {
+            //        excelConnection.Open();
+            //        using (OleDbDataReader dReader = cmd.ExecuteReader())
+            //        {
+            //            //using (SqlBulkCopy sqlBulk = new SqlBulkCopy(strConnection))
+            //            //{
+            //            //    //Give your Destination table name 
+            //            //    sqlBulk.DestinationTableName = "Excel_table";
+            //            //    sqlBulk.WriteToServer(dReader);
+            //            while (dReader.Read())
+            //            {
+            //                var row1Col0 = dReader[0];
+            //                var row1Col1 = dReader[1];
+            //               db.Kiosks.FirstOrDefaultAsync(x=>x.Nomer==dReader[1].ToString()).Result.Adress = dReader[2].ToString();
+            //                var row1Col3 = dReader[3];
+
+            //            }
+            //            //}
+            //        }
+            //    }
+            //}
+
+
+            //db.SaveChanges();
+            //--------------------------------------------------------------------------------------------
+
+
+
         }
 
     }
 }
+//string con =
+//  @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\temp\test.xls;" +
+//  @"Extended Properties='Excel 8.0;HDR=Yes;'";    
+//using(OleDbConnection connection = new OleDbConnection(con))
+//{
+//    connection.Open();
+//    OleDbCommand command = new OleDbCommand("select * from [Sheet1$]", connection); 
+//    using(OleDbDataReader dr = command.ExecuteReader())
+//    {
+//         while(dr.Read())
+//         {
+//             var row1Col0 = dr[0];
+//Console.WriteLine(row1Col0);
+//         }
+//    }
+//}

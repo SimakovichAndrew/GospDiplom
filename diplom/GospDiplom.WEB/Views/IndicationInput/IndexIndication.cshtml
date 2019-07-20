@@ -18,10 +18,14 @@
         @Html.Label("Номер киоска")
         @Html.Editor("text")
     }
-    @Html.Label("Первый счетчик") @ViewBag.Error
-    <input type="number" name="tarif1" />
+    <div>
+        @Html.Label("Первый счетчик") @ViewBag.Error
+        <input type="number" name="tarif1" />
+    </div>
+<div>
     @Html.Label("Второй счетчик") @ViewBag.Error
     <input type="number" name="tarif2" />
+</div>
     @*@Html.Editor("number", "tarif")*@
     <button type="submit" name="button" value="Отправить" class="btn btn-primary mb-2" @*data-toggle="button"*@ aria-pressed="false" autocomplete="off">
         Отправить

@@ -4,8 +4,8 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-:root {
-  --blue: #007bff;
+:root    {
+  --blue: #007bff;   
   --indigo: #6610f2;
   --purple: #6f42c1;
   --pink: #e83e8c;
@@ -10014,10 +10014,11 @@ a.text-dark:hover, a.text-dark:focus {
   .table {
     border-collapse: collapse !important;
   }
-  .table td,
-  .table th {
-    background-color: #fff !important;
-  }
+    .table td,
+    .table th {
+        background-color: #fff !important;
+        border: 1px solid #dee2e6  !important;
+    }
   .table-bordered th,
   .table-bordered td {
     border: 1px solid #dee2e6 !important;

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title – приложение ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-sm bg-primary">
+            <span class="navbar-text navbar-expand-sm h2 text-white">База данных торговых объектов Гомельского филиала РУП "Белсоюзпечать"</span>
+   
+    </nav>
+    </div>
+    <div class="container body-content">
+        <hr />
+        @RenderBody()
+       
+    </div>
+    <footer>
+        <hr />
+        @*@Html.ActionLink("Регистраця", "Register", "Account", new { area = "" }, new { @class = "nav-link" })*@
+        @Html.ActionLink("Выход", "LogoutUser", "Account", new { area = "" }, new { @class = "nav-link" })
+        <p>&copy; @DateTime.Now.Year – разработка Симакович</p>
+        @*<p>@Html.ActionLink("Ввод показаний", "Index", "SchetchikInput")</p>*@
+    </footer>
+
+
+    @Scripts.Render("~/bundles/jquery")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -8,12 +8,14 @@ namespace GospDiplom.BLL.DTO
 {
     public class AllCounter
     {
-        public int NomerCounter { get; set; }
+        public string NomerCounter { get; set; }
         public string ModelCounter { get; set; }
         public string NomerKioska { get; set; }
         public double Tarif1Start { get; set; }
         public double Tarif1End { get; set; }
         public double Span { get; set; }
+        public double Tarif2Start { get; set; }
+        public double Tarif2End { get; set; }
         public bool TechUchet { get; set; }
         public bool TwoTarif { get; set; }
         public string Month { get; set; }
