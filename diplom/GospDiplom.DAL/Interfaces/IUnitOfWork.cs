@@ -14,6 +14,7 @@ namespace GospDiplom.DAL.Interfaces
         IRepository<Equipment> Equipments { get; }
         IRepository<Indication> Indications { get; }
         IRepository<Organization> Organizations { get; }
+        IRepository<Section>Sections { get; }
 
         ApplicationUserManager UserManager { get; }
         IClientManager ClientManager { get; }

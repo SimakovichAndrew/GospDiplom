@@ -21,6 +21,8 @@ namespace GospDiplom.DAL.EF
         public DbSet<Equipment> Equipments { get; set; }
         public DbSet<Indication> Indications { get; set; }
         public DbSet<Organization> Organizations { get; set; }
+        public DbSet<Section> Sections { get; set; }
+
         public DbSet<ClientProfile> ClientProfiles { get; set; }
 
         static GospContext()

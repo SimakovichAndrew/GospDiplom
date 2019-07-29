@@ -40,7 +40,7 @@ namespace GospDiplom.BLL.Service
             {
                 SchetchikDTO neworder = new SchetchikDTO
                 {
-                    //Nomer = kiosk.GetEnumerator().Current.Nomer.ToString(),
+                    //Nomer = section.GetEnumerator().Current.Nomer.ToString(),
                     //Tarif1Start = indication.GetEnumerator().Current.Tarif1Start,
                     //Tarif1End = indication.GetEnumerator().Current.Tarif1End,
                     //Month = indication.GetEnumerator().Current.Month
@@ -90,6 +90,33 @@ namespace GospDiplom.BLL.Service
             //var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Kiosk, KioskDTO>()).CreateMapper();
             return Mapper.Map<IEnumerable<Kiosk>, List<KioskDTO>>(Database.Kiosks.GetAll());
         }
+
+        public SectionDTO GetSection(string nomer)
+        {
+            if (nomer == null)
+                throw new ValidationException("Не установлен номер площадки", "");
+            var section = Database.Sections.GetString(nomer);
+            if (section == null)
+                throw new ValidationException("Земля не найденa", "");
+
+            return new SectionDTO { NomerKioska = section.NomerKioska, SectionId = section.SectionId, Certefikat = section.Certefikat  , AdresSection = section.AdresSection, DateArenda = section.DateArenda, AreaSection = section.AreaSection, DataResh = section.DataResh, Kadastr=section.Kadastr, TypeArenda = section.TypeArenda/*, Kiosk = section.Kiosk*/ };
+
+            // throw new NotImplementedException();
+        }
+
+        public IEnumerable<SectionDTO> GetSections()
+        {
+            // применяем автомаппер для проекции одной коллекции на другую
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Section, SectionDTO>()).CreateMapper();
+          var temp = mapper.Map<IEnumerable<Section>, List<SectionDTO>>(Database.Sections.GetAll()); 
+            //Mapper.Initialize(cfg => cfg.CreateMap<Kiosk, KioskDTO>());
+            //var kioski = Mapper.Map<IEnumerable<Kiosk>, List<KioskDTO>>(Database.Kiosks.GetAll());
+            //int i = 0;
+           return temp;
+            //throw new NotImplementedException();
+        }
+
+
 
         public SchetchikDTO GetSchetchik(int? id)
         {
@@ -224,7 +251,7 @@ namespace GospDiplom.BLL.Service
         {
             if (nomer == null)
                 throw new ValidationException("Не задан номер киоска", "");
-            //var kiosk = Database.Kiosks.Get(id.Value);
+            //var section = Database.Kiosks.Get(id.Value);
             var kiosk = Database.Kiosks.GetString(nomer);
             var orgName = Database.Organizations.Get(3);
             if (kiosk == null)
@@ -501,7 +528,7 @@ namespace GospDiplom.BLL.Service
 
         public void EditKiosk(KioskDTO kiosk)
         {
-            Database.Kiosks.Get(kiosk.KioskId).Section.AreaSection = kiosk.Area;
+            Database.Kiosks.Get(kiosk.KioskId).Area = kiosk.Area;
 
             Database.Kiosks.Get(kiosk.KioskId).ModelKioska = kiosk.ModelKioska;
 
@@ -509,7 +536,7 @@ namespace GospDiplom.BLL.Service
 
             Database.Kiosks.Get(kiosk.KioskId).Arenda = kiosk.Arenda;
 
-            //Database.Kiosks.Get(kiosk.KioskId).EquipmentKiosk = kiosk.;
+            //Database.Kiosks.Get(section.KioskId).EquipmentKiosk = section.;
 
             Database.Kiosks.Get(kiosk.KioskId).ModelKioska = kiosk.ModelKioska;
 

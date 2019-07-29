@@ -25,6 +25,8 @@ namespace GospDiplom.DAL.Repositories
 
         private IRepository<Organization> OrganizationRepository;
 
+        private IRepository<Section> SectionRepository;
+
         private ApplicationUserManager userManager;
         private ApplicationRoleManager roleManager;
        // private IClientManager clientManager;
@@ -39,6 +41,16 @@ namespace GospDiplom.DAL.Repositories
             clientManager = new ClientManager(db);
         }
 
+
+        public IRepository<Section> Sections
+        {
+            get
+            {
+                if (SectionRepository == null)
+                    SectionRepository = new SectionRepository(db);
+                return SectionRepository;
+            }
+        }
 
         public IRepository<Kiosk> Kiosks
         {

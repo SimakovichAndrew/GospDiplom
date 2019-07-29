@@ -1,19 +1,14 @@
-﻿using System;
+﻿using GospDiplom.DAL.Entities;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GospDiplom.DAL.Entities
+namespace GospDiplom.BLL.DTO
 {
-   public class Section
+    public class SectionDTO
     {
-       // 
-       
-        //
-        [Required]
         public int SectionId { get; set; }
 
         public string NomerKioska { get; set; }
@@ -25,8 +20,7 @@ namespace GospDiplom.DAL.Entities
         public string Certefikat { get; set; }
         public DateTime DateArenda { get; set; }
 
-        //[ForeignKey("Kiosk")]
         public Nullable<int> KioskId { get; set; }
-        public virtual Kiosk Kiosk { get; set; }
+      //  public virtual Kiosk Kiosk { get; set; }
     }
 }

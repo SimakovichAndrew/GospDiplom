@@ -9,6 +9,12 @@ namespace GospDiplom.WEB
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //routes.MapRoute(
+            //    name: null,
+            //    url: "IndicationMonth",
+            //    defaults: new { Controller = "SchetchikInput", Action = "IndicationMonth" });
+
+
             routes.MapRoute(
               name: null,
               url: "Page{page}",

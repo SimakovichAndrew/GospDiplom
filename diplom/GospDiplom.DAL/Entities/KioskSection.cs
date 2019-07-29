@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace GospDiplom.DAL.Entities
 {
-   public class Section
+   public class KioskSection
     {
        // 
-       
-        //
         [Required]
-        public int SectionId { get; set; }
+        //
+     //  [ForeignKey("Kiosk")]
+        public int KioskSectionId { get; set; }
 
         public string NomerKioska { get; set; }
         public string AdresSection { get; set; }
@@ -25,8 +25,9 @@ namespace GospDiplom.DAL.Entities
         public string Certefikat { get; set; }
         public DateTime DateArenda { get; set; }
 
-        //[ForeignKey("Kiosk")]
-        public Nullable<int> KioskId { get; set; }
+       
+       //public int? KioskId { get; set; }
+      
         public virtual Kiosk Kiosk { get; set; }
     }
 }

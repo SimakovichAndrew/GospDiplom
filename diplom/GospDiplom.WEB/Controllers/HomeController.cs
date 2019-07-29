@@ -58,11 +58,16 @@ namespace GospDiplom.WEB.Controllers
 
               return RedirectToAction ("IndexIndication","IndicationInput");
             }
-           IEnumerable<AllTable> tableKioski = orderService.GetAllKioski();
-            ViewBag.totalInfo = tableKioski;
-            InputViewModels listInput = new InputViewModels
+            //IEnumerable<AllTable> tableKioski = orderService.GetAllKioski();
+
+            IEnumerable<SectionDTO> section = orderService.GetSections();
+            IEnumerable<KioskDTO> kiosks = orderService.GetKiosks();
+           // ViewBag.totalInfo = tableKioski;
+            //InputViewModels listInput = new InputViewModels
+            SectionModel listInput = new SectionModel
             {
-                AllKioski = tableKioski
+                Kiosks=kiosks,
+                Sections = section
                 .Skip((page - 1) * PageCom)
                 .Take(PageCom),
                 PagingInfoCom = new PagingInfo

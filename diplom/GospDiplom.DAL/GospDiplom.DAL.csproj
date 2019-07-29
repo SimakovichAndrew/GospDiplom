@@ -99,6 +99,7 @@
     <Compile Include="Repositories\KioskRepository.cs" />
     <Compile Include="Repositories\OrganizationRepository.cs" />
     <Compile Include="Repositories\SchetchikRepository.cs" />
+    <Compile Include="Repositories\SectionRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

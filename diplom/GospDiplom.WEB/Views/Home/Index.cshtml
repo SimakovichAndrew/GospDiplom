@@ -1,4 +1,4 @@
-﻿@model GospDiplom.WEB.Models.InputViewModels
+﻿@model GospDiplom.WEB.Models.SectionModel
 
 @{
     ViewBag.Title = "Таблица торговых объектов Гомельского филиала РУП \" Белсоюзпечать\"";
@@ -13,7 +13,7 @@
                     Номер
                 </th>
                 <th scope="col">
-                    Тип объекта
+                    Дата решения
                 </th>
                 <th scope="col">
                     Город
@@ -22,51 +22,57 @@
                     Адрес
                 </th>
                 <th scope="col">
-                    Организация
+                    кадастровый<br />номер
                 </th>
                 <th scope="col">
-                    Номер договора
+                    Площадь
                 </th>
                 <th scope="col">
                     Аренда
                 </th>
+                <th scope="col">
+                   Дата аренды
+                </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.AllKioski)
+            @foreach (var item in Model.Sections)
             {
-                <tr>
+            <tr>
 
-                    <th scope="row">
+                <th scope="row">
 
 
-                        @Html.DisplayFor(modelItem => item.Nomer)
-                    </th>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ModelCounter)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Gorod)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Adress)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OrgName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Dogovor)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Arenda)
-                    </td>
+                    @Html.DisplayFor(modelItem => item.NomerKioska)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataResh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Kiosks.Where(x=>x.Nomer==item.NomerKioska).FirstOrDefault().Town)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Kiosks.Where(x => x.Nomer == item.NomerKioska).FirstOrDefault().Adress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kadastr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AreaSection)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeArenda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateArenda)
+                </td>
 
-                    @if (User.IsInRole("admin")|| User.IsInRole("moderator"))
-                    {
-                        <td>
-                            @Html.ActionLink("Редактировать", "EditKiosk", "EditKiosk", new { nomer = item.Nomer }, null)
-                        </td>}
-                </tr>
+                @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+                {
+                    <td>
+                        @Html.ActionLink("Редактировать", "EditKiosk", "EditKiosk", new { nomer = item.NomerKioska }, null)
+                    </td>}
+            </tr>
             }
         </tbody>
     </table>

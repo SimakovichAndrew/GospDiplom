@@ -26,10 +26,11 @@ namespace GospDiplom.BLL.Service
 
         public async Task<OperationDetails> CreateUser(UserDTO userDto)
         {
+
             ApplicationUser user = await Database.UserManager.FindByNameAsync(userDto.UserName);
             if (user == null)
             {
-                user = new ApplicationUser { PasswordHash = userDto.Password, UserName = userDto.UserName, Email=userDto.Email };
+                user = new ApplicationUser { PasswordHash = userDto.Password, UserName = userDto.UserName/*, Email=userDto.Email*/ };
                 var result = await Database.UserManager.CreateAsync(user, userDto.Password);
                 if (result.Errors.Count() > 0)
                     return new OperationDetails(false, result.Errors.FirstOrDefault(), "");
@@ -44,7 +45,7 @@ namespace GospDiplom.BLL.Service
             }
             else
             {
-                return new OperationDetails(false, "Пользователь с таким логином уже существует", "Email");
+                return new OperationDetails(false, "Пользователь с таким логином уже существует", "UserName");
             }
         }
 

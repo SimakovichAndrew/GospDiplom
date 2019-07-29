@@ -3,10 +3,10 @@
     ViewBag.Title = "Показания счетчиков";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@if (ViewBag.Temp != 0)
-{
-    @Html.Partial("IndicationMonth")
-}
+@*@if (ViewBag.Temp != 0)
+    {*@
+@Html.Partial("IndicationMonth")
+@*}*@
 <div class="pager">
     @Html.PageLinks(Model.PagingInfoCom, x => Url.Action("Index", new { page = x }))
     @*@Html.PageLinks(Model.First().PagingInfoCom, x => Url.Action("Chat", new { page = x, category = Model.CurrentTopicName }))*@

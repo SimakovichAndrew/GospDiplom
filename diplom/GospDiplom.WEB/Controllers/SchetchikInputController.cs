@@ -17,7 +17,7 @@ namespace GospDiplom.WEB.Controllers
         IProcedureService db;
         const string allmonth = "";
         string chek="1";
-        bool bt = false;
+        bool bt = false; //выбор кнопки потребление(true)    показания
         int PageCom = 50;
             // int  viewTemp = 0;
 
@@ -70,6 +70,30 @@ namespace GospDiplom.WEB.Controllers
             return View(CounterInfo);
         }
 
+
+        [HttpGet]
+        public ActionResult IndexIndication(int page = 1)
+        {
+
+            //int PageCom = 5;
+            ViewBag.Temp = 1;//индикация для partialView index SchetchikInput
+
+            SchetchikViewModel CounterInfo = new SchetchikViewModel
+            {
+                AllCounters = db.GetAllCounters()/*listTotalInfo*/
+                .Skip((page - 1) * PageCom)
+                .Take(PageCom),
+                PagingInfoCom = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageCom,
+                    TotalItems = db.GetAllCounters().Count()
+                }
+
+            };
+
+            return View(CounterInfo);
+        }
 
         [HttpPost]
         public ActionResult IndicationTemp(int nomer, string month, string checkSort, string btn)
@@ -188,12 +212,6 @@ namespace GospDiplom.WEB.Controllers
             ViewBag.indicationKiosk = "One Kiosk ALL Month";
             CounterInfo.AllCounters.GroupBy(x=>x.NomerCounter);
             string sort = ViewBag.Sort;
-            //switch (sort)
-            //{
-            //    case "2": CounterInfo.AllCounters.OrderBy(y => y.Date); break;
-            //    case "3": CounterInfo.AllCounters.OrderBy(y => y.Span); break;
-            //    default: CounterInfo.AllCounters.OrderBy(y => y.NomerKioska); break;
-            //}
 
             return IndicationMonth(CounterInfo, true);
         }
@@ -235,7 +253,7 @@ namespace GospDiplom.WEB.Controllers
 
 
         [HttpGet]
-        public ViewResult IndicationMonth(SchetchikViewModel schetchikViewModel, bool form, int page = 1)
+        public ViewResult IndicationMonth(SchetchikViewModel schetchikViewModel, bool bt, int page = 1)
         {
             // viewTemp = 3;
             ViewBag.Sort = chek;//индикация для partialView index SchetchikInput
@@ -247,8 +265,6 @@ namespace GospDiplom.WEB.Controllers
             if (schetchikViewModel.AllCounters.Count() != 0)
             {
                 CounterInfo = schetchikViewModel;
-               // x = schetchikViewModel.AllCounters.ToList();
-                //ViewData["SchetchikAllCounters"] = x;
             }
             else
             {
@@ -284,7 +300,7 @@ namespace GospDiplom.WEB.Controllers
             //    default: x = CounterInfo.AllCounters.OrderBy(y => y.NomerKioska).ToList(); break;
             //}
             ViewData["SchetchikAllCounters"] = CounterInfo.SortCounter(ViewBag.Sort);
-            if (form)
+            if (bt)
                 return View("IndicationOneKioskAllMonth", CounterInfo);
             else
                 return View("IndicationMonth");

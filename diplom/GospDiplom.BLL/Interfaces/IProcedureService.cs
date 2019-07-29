@@ -19,6 +19,8 @@ namespace GospDiplom.BLL.Interfaces
         OrganizationDTO GetOrganization(int? id);
         IEnumerable<EquipmentDTO> GetEquipments();
         EquipmentDTO GetEquipment(int? id);
+        SectionDTO GetSection(string nomer); //Выбор киоска для работы с ним
+        IEnumerable<SectionDTO> GetSections();//получение всех киосkов
         IEnumerable<AllTable> GetAllKioski();
         KioskDTO GetInfokiosk(string nomer);
         IEnumerable<AllCounter> GetAllCounters();

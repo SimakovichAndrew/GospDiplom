@@ -45,34 +45,15 @@
                 <ul class="nav navbar-nav nav-flex-icons ml-auto">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li class="nav-item">
-                            <a class="nav-link">
-                                <i class="fa fa-envelope"></i>
-                                <span class="clearfix d-none d-sm-inline-block"> @User.Identity.Name</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link">
-                                <i class="fa fa-gear"></i>
-                                <span class="clearfix d-none d-sm-inline-block">@Html.ActionLink("Выход", "LogoutUser", "Account", new { area = "" }, new { @class = "navbar-brand" })</span>
-                            </a>
-                        </li>
+                        <li class="navbar-item"><a class="navbar-brand">@*Html.ViewBag.Greeting*@  @User.Identity.Name</a></li>
+                        <li class="nav-item">@Html.ActionLink("Выход", "LogoutUser", "Account", new { area = "" }, new { @class = "navbar-brand" })</li>
                     }
                     @if (User.IsInRole("admin"))
                     {
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-user"></i>
-                                <span class="clearfix d-none d-sm-inline-block">Админка</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                @Html.ActionLink("EDIT", "EditRole", "Admin", new { area = "" }, new { @class="dropdown-item" })
-                                @Html.ActionLink("UPDATE", "Index", "EditKiosk", new { area = "" }, new { @class = "dropdown-item" })
-                        </div>
-                            </li>
-                        }
-                    </ul>
+                        <li class="nav-item"> @Html.ActionLink("EDIT", "EditRole", "Admin", new { area = "" }, new { @class = "navbar-brand" })</li>
+                        <li class="nav-ite"> @Html.ActionLink("UPDATE", "Index", "EditKiosk", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    }
+                </ul>
             </nav>
         </div>
     </header>

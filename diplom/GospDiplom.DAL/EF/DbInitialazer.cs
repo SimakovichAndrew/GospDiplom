@@ -143,12 +143,18 @@ namespace GospDiplom.DAL.EF
                 }
             });
 
-            for (int i = 5; i < 210; i++)
+            for (int i = 5; i < 221; i++)
             {
-                db.Kiosks.Add(new Kiosk { Nomer = i.ToString(), Arenda = new DateTime(2019, 9, 16), ModelKioska = "Киоск", OrganizationId = 1, Town = Towns.Гомель });
-
+             Kiosk kiosk =  new Kiosk { Nomer = i.ToString(), Arenda = new DateTime(2019, 9, 16), ModelKioska = "Киоск", OrganizationId = 1, Town = Towns.Гомель };
+                db.Kiosks.Add(kiosk);
             }
+            db.SaveChanges();
 
+            for (int i = 1; i < 221; i++)
+            {
+                Section section = new Section {/*SectionId=0,*/ KioskId = i/*db.Kiosks.FirstOrDefaultAsync(x=>x.Nomer==i.ToString()).Result.KioskId*/, NomerKioska = i.ToString(), AdresSection = Towns.Гомель.ToString(), AreaSection = 10, Certefikat = "Unknow", DataResh = DateTime.Now, DateArenda = DateTime.Today, Kadastr = "Kadastr", TypeArenda = "Временно"};
+                db.Sections.Add(section);
+            }
             db.SaveChanges();
 
             db.Schetchiks.AddRange(new List<Schetchik>
@@ -182,7 +188,6 @@ namespace GospDiplom.DAL.EF
                      ModelSchetchika="Mirtek", NomerSchetchika="78901", TexUchet=false, TwoTarif=true, KioskId=4
                 }
             });
-
             db.SaveChanges();
 
             db.Equipments.AddRange(new List<Equipment>
@@ -211,6 +216,7 @@ namespace GospDiplom.DAL.EF
 
             db.SaveChanges();
 
+           
 
             //--------------------------------------------------------------------------------------------
             // String excelConnString = String.Format("Provider=Microsoft.JET.OLEDB.4.0;Data Source={0};Extended Properties=\"Excel 8.0\"", @"D:\kioski.xls"/*filePath*/);

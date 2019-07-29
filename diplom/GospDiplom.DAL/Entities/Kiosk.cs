@@ -26,6 +26,9 @@ namespace GospDiplom.DAL.Entities
         public double Area { get; set; }
 
 
+        // [ForeignKey("Section")]
+       // public Nullable<int> SectionId { get; set; }
+       // public virtual Section Section { get; set; }
 
         public virtual ICollection<Equipment> Equipments { get; set; }
         public virtual ICollection<Schetchik> Schetchiks { get; set; }
@@ -35,8 +38,6 @@ namespace GospDiplom.DAL.Entities
         public Nullable<int> OrganizationId { get; set; }
         //ссылка на контрагента
         public virtual Organization Organization { get; set; }
-
-        public virtual Section Section { get; set; }
 
         //// Это свойство будет использоваться как внешний ключ
         //[ForeignKey("Equipment")]
